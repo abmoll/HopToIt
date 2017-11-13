@@ -19,11 +19,17 @@ app.get('/', function(request, response) {
 
 app.get('/api', function(req, res) {
   console.log(req.query);
-  var breweryUrl = `http://api.brewerydb.com/v2/?key=58bc55fe9138082bf63a6f6ff8c1c861`;
+  //var breweryUrl = `http://api.brewerydb.com/v2/beers?name=Fat+Tire&key=58bc55fe9138082bf63a6f6ff8c1c861`;
+  //var breweryUrl = `http://api.brewerydb.com/v2/locations?postalCode=80516&key=58bc55fe9138082bf63a6f6ff8c1c861`;
+  //var breweryUrl = `http://api.brewerydb.com/v2/locations?locality=Windsor&key=58bc55fe9138082bf63a6f6ff8c1c861`;
+  var breweryUrl = `http://api.brewerydb.com/v2/locations?locality=${req.query.locality}&region=${req.query.region}&key=58bc55fe9138082bf63a6f6ff8c1c861`;
+  //var breweryUrl = `http://api.brewerydb.com/v2/locations?region=Colorado&key=58bc55fe9138082bf63a6f6ff8c1c861`;
   request(breweryUrl, function(err, response, body) {
     console.log("started API request");
-    //console.log(body)
-    res.send(body);
+    console.log(response)
+    console.log(body)
+    //res.send(response)
+    res.send(body)
   })
 })
 
@@ -31,6 +37,8 @@ app.listen(8080, function() {
   console.log('The app is running on 8080');
 })
 
+
+// ************* Database stuff for reference ********************
 // var mongoose = require('mongoose') // we dont need mongo since mongoose
 // mongoose.connect('mongodb://localhost:27017/roadtrip', {
 //   useMongoClient: true
@@ -56,17 +64,6 @@ app.listen(8080, function() {
 // //create a model
 // var TripModel = mongoose.model('Food', foodSchema)
 //
-// app.get('/doublecandy', function(req, res) {
-//   FoodModel.find({
-//     name: 'CottonCandy'
-//   }, function(err, data)) {
-//     data[0].calories = data[0].calories * 2
-//     data[0].save(function() {
-//       res.send(data[0])
-//       res.send(data)
-//     })
-//   })
-// })
 //
 // app.get('/allfood'),
 //   function(req, res) {
@@ -77,19 +74,7 @@ app.listen(8080, function() {
 //     })
 // })
 //
-// app.get('/', function(req, res)) {
-//     var newFood = new FoodModel({
-//       name: 'Candy Corn',
-//       calories = 50
-//     })
-//     newFood.save(function(err) {
-//           // error here if object does not match schema
-//           if err {
-//             res.send(err)
-//           } else {
-//             res.send('saved the food')
-//           }
-//         }
+
 //
 //
 //         app.post('/validate-cargo', function(request, response) {
@@ -105,45 +90,4 @@ app.listen(8080, function() {
 //           response.send("got your data!")
 //         })
 //
-//         app.get('/hello', function(request, response) {
-//           response.send("Hello World");
-//         })
 //
-//
-//         app.get('/Home', function(request, response) {
-//           response.sendFile('./public/index.html', {
-//             root: './'
-//           })
-//           // response.send("Web page made by Alex")
-//         })
-//
-//         app.get('/SanFran', function(request, response) {
-//           response.sendFile('./public/SanFran.html', {
-//             root: './'
-//           })
-//           // response.send("Web page made by Alex")
-//         })
-//
-//         app.get('/Boulder', function(request, response) {
-//           response.sendFile('./public/Boulder.html', {
-//             root: './'
-//           })
-//           // response.send("Web page made by Alex")
-//         })
-//
-//         app.get('/NewYork', function(request, response) {
-//           response.sendFile('./public/NewYork.html', {
-//             root: './'
-//           })
-//           // response.send("Web page made by Alex")
-//         }) app.get('/Barcelona', function(request, response) {
-//           response.sendFile('./public/Barcelona.html', {
-//             root: './'
-//           })
-//           // response.send("Web page made by Alex")
-//         }) app.get('/Rome', function(request, response) {
-//           response.sendFile('./public/Rome.html', {
-//             root: './'
-//           })
-//           // response.send("Web page made by Alex")
-//         })
