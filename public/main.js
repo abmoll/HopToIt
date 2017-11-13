@@ -18,6 +18,11 @@ $(document).ready(function() {
     })
   })
 
+  $(".theScreen").append("<br><p>Asteroid Name: " + data.near_earth_objects[day][i].name + "</p>")
+  //$(".theScreen").append("<p>Velocity MPH: " + Math.round(data.near_earth_objects[day][i].close_approach_data[0].relative_velocity.miles_per_hour) + "</p>")
+  // $(".theScreen").append("<p>Max Diameter Feet: " + Math.round(data.near_earth_objects[day][i].estimated_diameter.feet.estimated_diameter_max) + "</p>")
+
+
 });
 
 //   $('#validate').click(function() {
@@ -26,7 +31,6 @@ $(document).ready(function() {
 //       alert("you do not have enough funds")
 //       document.getElementById("validate").style.border = "thick solid #DC143C";
 //     }
-
 //     }
 //     $.post("/validate-cargo", {
 //         weight: weight,
