@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" type="text/css" href="./style.css">
+</head>
+
+<body>
+  <div class="title-bar">
+    <h1>Roadtrip Validator
+</h1>
+  </div>
+  <h3>Select items to bring on roadtrip:
+</h3>
+
+    <form>
+
+      <img width=40% src="tshirt.png"><br>
+      Kazakh Flags $17
+        <input id='flagplus' type="submit" value="Add">
+        <input id='flagtminus' type="submit" value="Remove">
+        <div id="flag">0</div>
+      </form><br>
+
+      <form>
+        <img width=30% src="azamat.jpg"><br><div id="azName">
+        Posters of Azamat $25</div>
+          <input id='azamatplus' type="submit" value="Add">
+          <input id='azamatminus' type="submit" value="Remove"><br>
+          <div id="azamat">0</div>
+        </form><br>
+
+        <form>
+      <img width=40% src="baywatch.jpg"><br>
+        Baywatch Videos $12
+        <input id='baywatchplus' type="submit" value="Add">
+        <input id='baywatchminus' type="submit" value="Remove">
+      </form><br>
+
+      <form>
+        <img width=50% src="bear.jpg"><br>
+        Small Bears $30
+          <input id='bearplus' type="submit" value="Add">
+          <input id='bearminus' type="submit" value="Remove">
+        </form><br>
+
+      <form>
+        <img width=40% src="mankini2.jpg"><br>
+        Mankinis $20
+          <input id='mankiniplus' type="submit" value="Add">
+          <input id='mankiniminus' type="submit" value="Remove">
+        </form><br>
+
+          <input id='validate' type="submit" value="Validate Cargo">
+            <p>Your total funds are:</p>
+            <form id="form">
+                <input id="totFunds" type="text" readonly="readonly" name="Total Funds"><br>
+                <p>Your total weight is:</p>
+                <input id="totWeight" readonly="readonly" type="text"><br>
+              </form>
+
+  <p>
+</p>
+  <div class="theScreen">
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+    <script src=./main.js></script>
+  </div>
+  </div>
+  <br>
+</body>
+
+</html>
