@@ -6,10 +6,9 @@
   <body>
     <div class="container">
       <div class="options-box">
-        <h1>Find Your New NYC Home</h1>
+        <h1>Find Your Route</h1>
         <div>
-          <input id="show-listings" type="button" value="Show Listings">
-          <input id="hide-listings" type="button" value="Hide Listings">
+          <input id="calcRoute" type="button" value="Calculate Route">
         </div>
       </div>
       <div id="floating-panel"></div>
@@ -17,6 +16,7 @@
       <div id="map"></div>
 
     </div>
+    <div id="directions-panel"></div>
     <script>
     // create a new map
     function initMap() {
@@ -25,7 +25,7 @@
       var map = new google.maps.Map(document.getElementById('map'), {
         // default zoom level and center of map, center must be lat/lng
         zoom: 7,
-        center: {lat: 41.85, lng: -87.65}
+        center: {lat: 39.74, lng: -104.99}
       });
       // display map
       directionsDisplay.setMap(map);
@@ -45,10 +45,9 @@
       console.log(directionsDisplay)
       console.log("-=-=-=-=-=-=-=-=-clicked-=-=-=-=-=-=-=-=-=-=")
     };
-      // document.getElementById('end').addEventListener('change', onChangeHandler);
-      document.getElementById('show-listings').addEventListener('click', onChangeHandler);
+      document.getElementById('calcRoute').addEventListener('click', onChangeHandler);
     }
-
+    var waypnt = [{location:"codecraft", stopover: true},{location:"denver,co", stopover:true},{location:"loveland,co", stopover:true}]
 // need to add waypoint support
 
     function calculateAndDisplayRoute(directionsService, directionsDisplay) {
@@ -57,15 +56,30 @@
       console.log(directionsDisplay)
       directionsService.route({
         // where to start route, can be either text string or lat/lng
-        origin: "denver,co",
+        origin: "weldwerks brewing",
         // where to end route, either text string or lat/long
-        destination: "greeley,co",
+        destination: "weldwerks brewing",
+        // waypoints to travel to
+        waypoints: waypnt,
+        // optimize travel route
+        optimizeWaypoints: true,
         // travel mode can be: DRIVING, WALKING, BICYCLING, TRANSIT
-        travelMode: 'BICYCLING'
+        travelMode: 'DRIVING'
         // check to see if provided points are valid, if so create a new direction
       }, function(response, status) {
         if (status === 'OK') {
           directionsDisplay.setDirections(response);
+        //   var route = response.routes[0]:
+        //   var summaryPanel = document.getElementById('directions-panel');
+        //   summaryPanel.innerHTML = '';
+        //   for (var i=0; i < route.legs.length; i++) {
+        //     var routeSegment = i +1;
+        //     summaryPanel.innerHTML += '<b>Route Segment: ' + routeSegment + '</b><br>';
+        //     summaryPanel.innerHTML += route.legs[i].start_address + ' to ';
+        //     summaryPanel.innerHTML += route.legs[i].end_address + ' <br> ';
+        //     summaryPanel.innerHTML += route.legs[i].distance.text + '<br><br>';
+        //
+        // }
         } else {
           window.alert('Directions request failed due to ' + status);
         }
