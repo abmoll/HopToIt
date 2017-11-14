@@ -2,10 +2,11 @@
 <html>
 <head><h1>HopToIt Application</h1>
     <link rel="stylesheet" type="text/css" href="./style.css">
-
+<title>HopToIt</title>
   </head>
   <body>
 <h2>Enter Location to Search for Breweries and Beer</h2>
+
 <form id="form">
   <input id="locality" type="text" placeholder="City"><br>
   <input id="region" type="text" placeholder="State"><br>
@@ -14,9 +15,44 @@
 </form>
 <div class="theScreen"></div>
 
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
-<script src=./main.js></script>
+  <link href="style.css" type="text/css" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.3/vue.js"></script>
+
+  <p>
+    <div class="col-sm-9 col-xs-12">
+    <div id="app">
+      <h2>
+        <th>Todo Items</th>
+      </h2>
+
+        <form v-on:submit="addBrewery">
+          <input v-model="newTodo.text" placeholder="enter todo">
+          <input v-model="newTodo.priority" placeholder="enter priority">
+          <!-- even though this is a range input, its value is always a string -->
+          <input type="submit" value="Submit">
+        </form>
+        <form v-on:submit="sort">
+          <input type="submit" value="Sort">
+        </form>
+        <br>
+        <table class="table table-hover">
+          <tr v-for="item in todos">
+            <td>{{item.text}}</td>
+            <td>{{item.priority}}</td>
+            <td v-on:click=removeTodo(item)>
+              <input id="delete" type="submit" value="x">
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </p>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+  <script src=./main.js></script>
+
 
   </body>
   </html>
