@@ -18,6 +18,13 @@ app.get('/server', function(request, response) {
     console.log("yes")
 });
 
+app.get('/mainMap', function(req,res){
+    res.sendFile("./public/googleMaps.html", {root: './'});
+})
+app.get('/testing', function(req,res){
+    res.sendFile("./public/testing.html", {root: './'});
+})
+
 app.get('/api', function(req, res) {
   console.log(req.query);
   //var breweryUrl = `http://api.brewerydb.com/v2/beers?name=Fat+Tire&key=58bc55fe9138082bf63a6f6ff8c1c861`;
