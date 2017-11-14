@@ -14,7 +14,7 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json())
 
 app.get('/server', function(request, response) {
-    response.sendFile("./public/buttonindex.html", {root: './'});
+    response.sendFile("./public/directions.html", {root: './'});
     console.log("yes")
 });
 

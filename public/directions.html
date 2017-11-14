@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="/directionsStyles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="options-box">
+        <h1>Find Your New NYC Home</h1>
+        <div>
+          <input id="show-listings" type="button" value="Show Listings">
+          <input id="hide-listings" type="button" value="Hide Listings">
+        </div>
+      </div>
+      <div id="floating-panel"></div>
+      <div id="right-panel"></div>
+      <div id="map"></div>
+
+    </div>
+    <script>
+    function initMap() {
+      var directionsService = new google.maps.DirectionsService;
+      var directionsDisplay = new google.maps.DirectionsRenderer;
+      var map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 7,
+        center: {lat: 41.85, lng: -87.65}
+      });
+      directionsDisplay.setMap(map);
+      directionsDisplay.setPanel(document.getElementById('right-panel'));
+
+       var control = document.getElementById('floating-panel');
+       control.style.display = 'block';
+       map.controls[google.maps.ControlPosition.TOP_CENTER].push(control);
+
+
+      var onChangeHandler = function() {
+        console.log("clicked")
+        calculateAndDisplayRoute(directionsService, directionsDisplay);
+      };
+      document.getElementById('show-listings').addEventListener('click', onChangeHandler);
+      // document.getElementById('end').addEventListener('change', onChangeHandler);
+    }
+
+    function calculateAndDisplayRoute(directionsService, directionsDisplay) {
+      directionsService.route({
+        origin: "denver,co",
+        destination: "greeley,co",
+        travelMode: 'DRIVING'
+      }, function(response, status) {
+        if (status === 'OK') {
+          directionsDisplay.setDirections(response);
+        } else {
+          window.alert('Directions request failed due to ' + status);
+        }
+      });
+    }
+  </script>
+  <script async defer
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC46J7DlCyI-jZLtGueSXja2uDkdDEJYRA&callback=initMap">
+  </script>
+    <!-- <script async defer
+    src=
+    "https://maps.googleapis.com/maps/api/directions/json?origin=greeley,+co&destination=denver,+co&key=AIzaSyC46J7DlCyI-jZLtGueSXja2uDkdDEJYRA&callback=initialize">
+    </script> -->
+    <script src="./directions.js"></script>
+    <!-- <script>
+    var directionsDisplay;
+    var directionsService = new google.maps.DirectionsService();
+    var map;
+
+    function initialize() {
+      directionsDisplay = new google.maps.DirectionsRenderer();
+      var chicago = new google.maps.LatLng(41.850033, -87.6500523);
+      var mapOptions = {
+        zoom:7,
+        center: chicago
+      }
+      map = new google.maps.Map(document.getElementById('map'), mapOptions);
+      directionsDisplay.setMap(map);
+    }
+    function calcRoute() {
+      var start = "chicago, il";
+      var end = "flagstaff, az";
+      var request = {
+        origin: start,
+        destination: end,
+        travelMode: 'DRIVING'
+      };
+      directionsService.route(request, function(result, status) {
+        if (status == 'OK') {
+          directionsDisplay.setDirections(result);
+        }
+      });
+    }
+    </script> -->
+
+  </body>
+</html>
