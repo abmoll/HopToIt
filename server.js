@@ -13,9 +13,10 @@ app.use(bodyParser.urlencoded({
 
 app.use(bodyParser.json())
 
-app.get('/', function(request, response) {
-    response.sendFile('./public/index.html', {root: './'})
-})
+app.get('/server', function(request, response) {
+    response.sendFile("./public/directions.html", {root: './'});
+    console.log("yes")
+});
 
 app.get('/api', function(req, res) {
   console.log(req.query);

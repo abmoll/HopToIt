@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="/directionsStyles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="options-box">
+        <h1>Find Your Route</h1>
+        <div>
+          <input id="calcRoute" type="button" value="Calculate Route">
+        </div>
+      </div>
+      <div id="floating-panel"></div>
+      <div id="right-panel"></div>
+      <div id="map"></div>
+
+    </div>
+    <div id="directions-panel"></div>
+    <script>
+    // create a new map
+    function initMap() {
+      var directionsService = new google.maps.DirectionsService;
+      var directionsDisplay = new google.maps.DirectionsRenderer;
+      var map = new google.maps.Map(document.getElementById('map'), {
+        // default zoom level and center of map, center must be lat/lng
+        zoom: 7,
+        center: {lat: 39.74, lng: -104.99}
+      });
+      // display map
+      directionsDisplay.setMap(map);
+      // display direction text
+      directionsDisplay.setPanel(document.getElementById('right-panel'));
+
+      // push text directions to div
+       var control = document.getElementById('floating-panel');
+       control.style.display = 'block';
+       map.controls[google.maps.ControlPosition.TOP_CENTER].push(control);
+
+      // function to fire creating new directions when button is clicked
+      var onChangeHandler = function() {
+      calculateAndDisplayRoute(directionsService, directionsDisplay);
+      console.log(directionsService)
+      console.log("-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-")
+      console.log(directionsDisplay)
+      console.log("-=-=-=-=-=-=-=-=-clicked-=-=-=-=-=-=-=-=-=-=")
+    };
+      document.getElementById('calcRoute').addEventListener('click', onChangeHandler);
+    }
+    var waypnt = [{location:"codecraft", stopover: true},{location:"denver,co", stopover:true},{location:"loveland,co", stopover:true}]
+// need to add waypoint support
+
+    function calculateAndDisplayRoute(directionsService, directionsDisplay) {
+      console.log(directionsService)
+      console.log("-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-")
+      console.log(directionsDisplay)
+      directionsService.route({
+        // where to start route, can be either text string or lat/lng
+        origin: "weldwerks brewing",
+        // where to end route, either text string or lat/long
+        destination: "weldwerks brewing",
+        // waypoints to travel to
+        waypoints: waypnt,
+        // optimize travel route
+        optimizeWaypoints: true,
+        // travel mode can be: DRIVING, WALKING, BICYCLING, TRANSIT
+        travelMode: 'DRIVING'
+        // check to see if provided points are valid, if so create a new direction
+      }, function(response, status) {
+        if (status === 'OK') {
+          directionsDisplay.setDirections(response);
+        //   var route = response.routes[0]:
+        //   var summaryPanel = document.getElementById('directions-panel');
+        //   summaryPanel.innerHTML = '';
+        //   for (var i=0; i < route.legs.length; i++) {
+        //     var routeSegment = i +1;
+        //     summaryPanel.innerHTML += '<b>Route Segment: ' + routeSegment + '</b><br>';
+        //     summaryPanel.innerHTML += route.legs[i].start_address + ' to ';
+        //     summaryPanel.innerHTML += route.legs[i].end_address + ' <br> ';
+        //     summaryPanel.innerHTML += route.legs[i].distance.text + '<br><br>';
+        //
+        // }
+        } else {
+          window.alert('Directions request failed due to ' + status);
+        }
+      });
+    }
+  </script>
+  <script async defer
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC46J7DlCyI-jZLtGueSXja2uDkdDEJYRA&callback=initMap">
+  </script>
+    <!-- <script async defer
+    src=
+    "https://maps.googleapis.com/maps/api/directions/json?origin=greeley,+co&destination=denver,+co&key=AIzaSyC46J7DlCyI-jZLtGueSXja2uDkdDEJYRA&callback=initialize">
+    </script> -->
+    <script src="./directions.js"></script>
+    <!-- <script>
+    var directionsDisplay;
+    var directionsService = new google.maps.DirectionsService();
+    var map;
+
+    function initialize() {
+      directionsDisplay = new google.maps.DirectionsRenderer();
+      var chicago = new google.maps.LatLng(41.850033, -87.6500523);
+      var mapOptions = {
+        zoom:7,
+        center: chicago
+      }
+      map = new google.maps.Map(document.getElementById('map'), mapOptions);
+      directionsDisplay.setMap(map);
+    }
+    function calcRoute() {
+      var start = "chicago, il";
+      var end = "flagstaff, az";
+      var request = {
+        origin: start,
+        destination: end,
+        travelMode: 'DRIVING'
+      };
+      directionsService.route(request, function(result, status) {
+        if (status == 'OK') {
+          directionsDisplay.setDirections(result);
+        }
+      });
+    }
+    </script> -->
+
+  </body>
+</html>
