@@ -30,7 +30,7 @@
           <p>{{item.brewery.name}}</p>
           <p>{{item.streetAddress}}</p>
           <p>{{item.locality}}, {{item.region}} {{item.postalCode}}</p>
-          <p>{{item.website}}</p>
+          <p><a v-bind:href="item.website">{{item.website}}</a></p>
           <input id="delete" type="submit" value="Delete">
           <br><br>
         </form>

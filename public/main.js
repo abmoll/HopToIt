@@ -55,10 +55,12 @@ var mainVm = new Vue({
               zoom: 4
             });
         this.directionsDisplay.setMap(this.map);
+        if (mainVm.breweries.length > 0) {
+          mainVm.buildPins();
+        }
     },
 
     buildPins: function() {
-this.directionsDisplay.setMap(this.map);
       var vm = this;
       var address = mainVm.breweries
       console.log(address)
@@ -68,7 +70,9 @@ this.directionsDisplay.setMap(this.map);
       var infowindow = new google.maps.InfoWindow();
       var infowindowContent = document.getElementById('infowindowContent')
       infowindow.setContent(infowindowContent);
-      var service = new google.maps.places.PlacesService(map);
+      var service = new google.maps.places.PlacesService(vm.map);
+
+      // run geocoder to turn string into usable coordinates
       for (var i=0; i < address.length; i++) {
         console.log(address[i])
         geocoder.geocode({'address': address[i].brewery.name}, function(results, status) {
@@ -78,13 +82,14 @@ this.directionsDisplay.setMap(this.map);
                 // console.log(place)
 
           if (status === 'OK') {
-            // console.log(place)
-            // map.setCenter(results[0].geometry.location);
+            console.log(place)
+            vm.map.setCenter(results[0].geometry.location);
             console.log(results[0].place_id)
             var marker = new google.maps.Marker({
               map: vm.map,
               position: results[0].geometry.location
             });
+            console.log(marker)
           } else {
             alert('Geocode was not successful for the following reason: ' + status);
           }
@@ -139,7 +144,7 @@ $("#form").submit(function(event) {
         console.log(mainVm.breweryString)
       }
       mainVm.breweries = body.data
-      mainVm.buildPins();
+      mainVm.initMap();
 
     }
     console.log(typeof mainVm.breweryString)
