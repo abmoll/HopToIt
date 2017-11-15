@@ -26,14 +26,11 @@ var mainVm = new Vue({
       // db.collection.deleteOne()
       //   db remove command sendDB_ID
       //   mainVm.$forceUpdate();
-      //   send the object to be removed
-      // console.log("data: " + data)
       // })
     },
     addBrewery: function(item, event) {
       event.preventDefault();
-      console.log("item: " + item)
-      mainVm.breweries.push(item)
+      //mainVm.breweries.push(item)
       //$.post('/remove', item,(data)=>{
       //       mainVm.getFreshData()
       //       console.log(data)
