@@ -24,8 +24,8 @@ app.get('/api', function(req, res) {
   var breweryUrl = `http://api.brewerydb.com/v2/locations?locality=${req.query.locality}&region=${req.query.region}&key=58bc55fe9138082bf63a6f6ff8c1c861`;
   request(breweryUrl, function(err, response, body) {
     console.log("started API request");
-    console.log(response)
-    console.log(body)
+    //console.log(response)
+    //console.log(body)
     //res.send(response)
     res.send(body)
   })

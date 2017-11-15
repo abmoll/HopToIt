@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 body {
   background-color: gray;
   background-size: contain;
@@ -51,3 +52,66 @@ h3 {
 img {
   opacity: 0.8;
 }
+=======
+body {
+  background-color: gray;
+  background-size: contain;
+  color: white;
+  font-family: sans-serif;
+
+}
+
+#all {
+  margin: 25px;
+}
+
+a {
+  color: #16497C;
+}
+
+.boxed {
+  border: 1px solid grey;
+  border-radius: 5px;
+  height: 65px;
+  width: 300px;
+  margin-left: 20px;
+  margin-bottom: 5px;
+  color: #1F54BF;
+  font-family: sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+  position: relative;
+  top: 70px;
+  left: 150px;
+  margin-top: 10px;
+  padding: 10px;
+
+}
+
+h4 {
+  color: grey;
+}
+
+h3 {
+  color: blue;
+}
+
+#theBox {
+  height: 100px;
+  width: 200px;
+  padding: 3px;
+  margin: 10px;
+}
+
+.title-bar {
+  height: 50px;
+  width: 100%;
+  background-color: black;
+  color: white;
+
+}
+
+img {
+  opacity: 0.8;
+}
+>>>>>>> d094f2baa943d91bf7e9357b06146cc708e2009e

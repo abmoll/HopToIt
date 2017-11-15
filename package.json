@@ -1,7 +1,6 @@
 {
-  "name": "HopToIt",
+  "name": "hoptoit",
   "version": "1.0.0",
-  "description": "",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -13,5 +12,14 @@
     "body-parser": "^1.18.2",
     "express": "^4.16.2",
     "request": "^2.83.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abmoll/HopToIt.git"
+  },
+  "bugs": {
+    "url": "https://github.com/abmoll/HopToIt/issues"
+  },
+  "homepage": "https://github.com/abmoll/HopToIt#readme",
+  "description": ""
 }
