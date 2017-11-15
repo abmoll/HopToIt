@@ -75,7 +75,8 @@ var mainVm = new Vue({
       // run geocoder to turn string into usable coordinates
       for (var i=0; i < address.length; i++) {
         console.log(address[i])
-        geocoder.geocode({'address': address[i].brewery.name}, function(results, status) {
+        geocoder.geocode({'address': address[i].streetAddress + address[i].region}, function(results, status) {
+          // console.log(address[i].brewery)
           service.getDetails({
             placeId: results[0].place_id}, function(place, status) {
               if (status === google.maps.places.PlacesServiceStatus.OK) {
