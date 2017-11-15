@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="./style.css">
+  <title>HopToIt</title>
+</head>
+<body>
+  <p>
+    <h1>HopToIt</h1>
+  <p>Enter City and State OR Zip Code to Search for Breweries</p>
+
+  <form id="form">
+    <input id="locality" type="text" placeholder="City"><br>
+    <input id="region" type="text" placeholder="State"><br><br>
+    <input id="postalCode" type="text" placeholder="Zip Code"><br>
+    <input type="submit" value="Submit"><br>
+  </form>
+  <div class="theScreen"></div>
+
+  <link href="style.css" type="text/css" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.3/vue.js"></script>
+
+
+      <div id="app">
+        <h2>Brewery Results</h2>
+        <h3 v-if='breweries === undefined'>No results found</h3>
+        <form v-for="(item,index) in breweries" v-on:submit='removeBrewery(item, $event)' v-if='!item.hidden && index<10'>
+          <p>{{item.brewery.name}}</p>
+          <p>{{item.streetAddress}}</p>
+          <p>{{item.locality}}, {{item.region}} {{item.postalCode}}</p>
+          <p>{{item.website}}</p>
+          <input id="delete" type="submit" value="Delete">
+          <br><br>
+        </form>
+      </div>
+      <input id="startLoc" type="text" placeholder="Enter start point"><br>
+    </p>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+    <script src=./main.js></script>
+
+</body>
+
+</html>
