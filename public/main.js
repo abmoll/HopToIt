@@ -56,7 +56,13 @@ var mainVm = new Vue({
             });
         this.directionsDisplay.setMap(this.map);
         if (mainVm.breweries.length > 0) {
-          mainVm.buildPins();
+
+          $("#map").append(`<div id="infowindowcontent">
+              <span id="place-name" class="title"></span><br>
+              <span id="place-id"></span><br>
+              <span id="place-address"></span>
+            </div>`);
+            mainVm.buildPins();
         }
     },
 
@@ -65,37 +71,58 @@ var mainVm = new Vue({
       var address = mainVm.breweries
       console.log(address)
       console.log(typeof address)
-      var geocoder = new google.maps.Geocoder;
       // libraries to get place information
       var infowindow = new google.maps.InfoWindow();
-      var infowindowContent = document.getElementById('infowindowContent')
-      infowindow.setContent(infowindowContent);
+      var infowindowContent = document.getElementById('infowindowcontent')
+
       var service = new google.maps.places.PlacesService(vm.map);
+      var geocoder = new google.maps.Geocoder;
+
+
+
+
 
       // run geocoder to turn string into usable coordinates
       for (var i=0; i < address.length; i++) {
-        console.log(address[i])
         geocoder.geocode({'address': address[i].streetAddress + address[i].region}, function(results, status) {
-          // console.log(address[i].brewery)
           service.getDetails({
             placeId: results[0].place_id}, function(place, status) {
               if (status === google.maps.places.PlacesServiceStatus.OK) {
-                // console.log(place)
+                // console.log(place
+                if (status === 'OK') {
+                  console.log(place)
+                  vm.map.setZoom(13)
+                  vm.map.setCenter(results[0].geometry.location);
+                  console.log(results[0].place_id)
+                  console.log(marker)
+                } else {
+                  alert('Geocode was not successful for the following reason: ' + status);
+                }
+              }
+              var marker = new google.maps.Marker({
+                map: vm.map,
+                position: results[0].geometry.location
+              });
+              // marker.addListener('click', function() {
+              //   infowindow.open(map, marker)
+              // });
+              var name = place.name;
+              console.log(infowindowContent, 'look here')
+              infowindowContent.children['place-name'].textContent = place.name;
+              infowindowContent.children['place-id'].textContent = place.place_id;
+              infowindowContent.children['place-address'].textContent = results[0].formatted_address;
 
-          if (status === 'OK') {
-            console.log(place)
-            vm.map.setCenter(results[0].geometry.location);
-            console.log(results[0].place_id)
-            var marker = new google.maps.Marker({
-              map: vm.map,
-              position: results[0].geometry.location
-            });
-            console.log(marker)
-          } else {
-            alert('Geocode was not successful for the following reason: ' + status);
-          }
-        }
 
+
+
+
+        console.log(infowindowContent, 'setting')
+        // infowindow.open(map, marker);
+        marker.addListener('click', ()=>{
+          infowindow.setContent(`<div><strong>'  ${place.name}  '</strong><br>' +
+          'Place ID: ' ${place.place_id} '<br>`);
+          infowindow.open(map, marker);
+        });
 
       })
         });
