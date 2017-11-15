@@ -1,3 +1,10 @@
+/*
+.header-image {
+	margin: 0 auto;
+}
+*/
+
+/*
 body {
   background-color: gray;
   background-size: contain;
@@ -6,7 +13,7 @@ body {
 
 }
 
-.boxed {
+/*.boxed {
   border: 1px solid grey;
   border-radius: 5px;
   height: 65px;
@@ -23,19 +30,22 @@ body {
   margin-top: 10px;
   padding: 10px;
 
-}
+}*/
 
+/*
 h4 {
   color: grey;
 }
+*/
 
-#theBox {
+/*#theBox {
   height: 100px;
   width: 200px;
   padding: 3px;
   margin: 10px;
-}
+}*/
 
+/*
 .title-bar {
   height: 50px;
   width: 100%;
@@ -43,7 +53,9 @@ h4 {
   color: white;
 
 }
+*/
 
-img {
+/*img {
   opacity: 0.8;
-}
+}*/
+
