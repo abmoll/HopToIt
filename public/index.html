@@ -2,51 +2,72 @@
 <html>
 
 <head>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
-  <link rel="stylesheet" type="text/css" href="./style.css">
   <title>HopToIt</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.3/vue.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css?family=Vidaloka" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 
 <body>
   <div id="all">
-  <h1>Hop To It</h1>
-  <div id="container" style="width:100%;">
-    <div id="right" style="float:right; width:60%;">
-      <p>Placeholder text only. The commercial brewing of beer has taken place since at least 2500 BC. Brewing was initially a cottage industry, with production taking
-        place at home; by the ninth century monasteries and farms would produce beer on a larger scale.</p>
-      <img src="topo-co.jpg" width=600px>
+    <div id="carousel" class="carousel slide" data-ride="carousel">
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img class="d-block w-100" src="images/header.jpg">
+        </div>
+      </div>
     </div>
-  </div>
-  <div id="left" style="float:left; width:40%;"></div>
-  <p>Enter City and State OR a Zip Code to Search for Breweries</p>
 
-  <form id="form">
-    <input id="locality" type="text" placeholder="City"><br>
-    <input id="region" type="text" placeholder="State"><br><br>
-    <input id="postalCode" type="text" placeholder="Zip Code"><br>
-    <input type="submit" value="Submit"><br><br>
-  </form>
-  <div class="theScreen"></div>
+    <div class="headline">
+      <h1>Welcome to Hop To It!</h1>
+      <h2>Your guide to the best breweries and beers in the country!</h2>
+    </div>
 
-  <link href="style.css" type="text/css" rel="stylesheet">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.3/vue.js"></script>
+<!-- Left Column -->
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="container form-background-color">
+        <p>To find a brewery</p>
+        <p>Enter a City and State</p>
+        <p>OR a Zip Code</p>
 
+        <form id="form">
+          <input id="locality" type="text" placeholder="enter a City"><br>
+          <input id="region" type="text" placeholder="enter a State"><br><br>
+          <input id="postalCode" type="text" placeholder="Zip Code"><br>
+          <input type="submit" value="Submit"><br><br>
+        </form>
+        
+      <div class="theScreen"></div>
 
-  <div id="app">
-    <h2>Brewery Results</h2>
-    <h3 v-if='breweries === undefined'>No results found</h3>
-    <form v-for="(item,index) in breweries" v-on:submit='removeBrewery(item, $event)' v-if='!item.hidden && index<10'>
-      <p>{{item.brewery.name}}</p>
-      <p>{{item.streetAddress}}</p>
-      <!-- <p>{{item.locality}}, {{item.region}} {{item.postalCode}}</p> -->
-      <p><a v-bind:href='item.website'>{{item.website}}</a></p>
-      <input id="add" type="submit" value="Add">
-      <input id="delete" type="submit" value="Delete">
-      <br><br>
-    </form>
-  </div>
-  <input id="startLoc" type="text" placeholder="Enter start point"><br>
-  </p>
+      <div id="app">
+        <h2>Brewery Results</h2>
+        <h3 v-if='breweries === undefined'>No results found</h3>
+        <form v-for="(item,index) in breweries" v-on:submit='removeBrewery(item, $event)' v-if='!item.hidden && index<10'>
+          <p>{{item.brewery.name}}</p>
+          <p>{{item.streetAddress}}</p>
+          <p><a v-bind:href='item.website'>{{item.website}}</a></p>
+          <input id="add" type="submit" value="Add">
+          <input id="delete" type="submit" value="Delete">
+
+        </form>
+        </div>
+        <input id="startLoc" type="text" placeholder="Enter start point"><br>
+      </div>
+    </div>
+
+  <!-- Right Column -->
+          <div class="col-sm-6">
+            <div class="container">
+              <p>Placeholder text only. The commercial brewing of beer has taken place since at least 2500 BC. Brewing was initially a cottage industry, with production taking place at home; by the ninth century monasteries and farms would produce beer on a larger scale.</p>
+              <img src="topo-co.jpg" width=600px>
+            </div>
+          </div>
+        </div>
+      </div>
+
 
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
