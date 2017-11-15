@@ -28,14 +28,22 @@ app.get('/testing', function(req,res){
 app.get('/api', function(req, res) {
   console.log(req.query);
   //var breweryUrl = `http://api.brewerydb.com/v2/beers?name=Fat+Tire&key=58bc55fe9138082bf63a6f6ff8c1c861`;
-  //var breweryUrl = `http://api.brewerydb.com/v2/locations?postalCode=80516&key=58bc55fe9138082bf63a6f6ff8c1c861`;
-  //var breweryUrl = `http://api.brewerydb.com/v2/locations?locality=Windsor&key=58bc55fe9138082bf63a6f6ff8c1c861`;
   var breweryUrl = `http://api.brewerydb.com/v2/locations?locality=${req.query.locality}&region=${req.query.region}&key=58bc55fe9138082bf63a6f6ff8c1c861`;
-  //var breweryUrl = `http://api.brewerydb.com/v2/locations?region=Colorado&key=58bc55fe9138082bf63a6f6ff8c1c861`;
   request(breweryUrl, function(err, response, body) {
     console.log("started API request");
     console.log(response)
     console.log(body)
+    //res.send(response)
+    res.send(body)
+  })
+})
+
+app.get('/apiZip', function(req, res) {
+  console.log(req.query);
+  var breweryUrl = `http://api.brewerydb.com/v2/locations?postalCode=${req.query.postalCode}&key=58bc55fe9138082bf63a6f6ff8c1c861`;
+  request(breweryUrl, function(err, response, body) {
+    //console.log(response)
+    console.log(body.data)
     //res.send(response)
     res.send(body)
   })
@@ -81,21 +89,4 @@ app.listen(8080, function() {
 //       res.send(data)
 //     })
 // })
-//
-
-//
-//
-//         app.post('/validate-cargo', function(request, response) {
-//           // if (fund<0){
-//           // console.log("insufficient funds")}
-//           console.log(request.body);
-//           console.log("weight" + request.body.weight);
-//           console.log("fund" + request.body.fund);
-//           console.log(request.body.stuff[0].item);
-//           console.log(request.body.stuff[0].numItems);
-//           if (request.body.weight > 200) console.log("you are over your weight limit")
-//           if (request.body.fund < 0) console.log("you have run out of funds")
-//           response.send("got your data!")
-//         })
-//
 //
