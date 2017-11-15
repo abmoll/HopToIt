@@ -18,10 +18,16 @@ app.get('/server', function(request, response) {
     console.log("yes")
 });
 
+app.post('/add', function(request, response) {
+    //add to map functionality
+    response.send("added item")
+});
+
 app.post('/remove', function(request, response) {
     console.log("data: " + data)
     console.log("item: " + item)
-    response.send(response)
+    todoModel.findByIdAndRemove(request.body._id, function(err, todo){
+    response.send("deleted item")
 });
 
 app.get('/api', function(req, res) {

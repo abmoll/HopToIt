@@ -22,19 +22,16 @@ var mainVm = new Vue({
       //var dbId = {id: objectid}
       mainVm.breweries.splice(1,index)
 
-      // $.post('/remove', dbId, (data)=>{
-      // db.collection.deleteOne()
-      //   db remove command sendDB_ID
-      //   mainVm.$forceUpdate();
-      // })
+      $.post('/remove', item, (data)=>{
+        mainVm.$forceUpdate();
+      })
     },
+
     addBrewery: function(item, event) {
       event.preventDefault();
       //mainVm.breweries.push(item)
-      //$.post('/remove', item,(data)=>{
-      //       mainVm.getFreshData()
-      //       console.log(data)
-      //  })
+      $.post('/add', item, (data)=>{
+        })
     },
   },
 })
