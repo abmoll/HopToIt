@@ -25,29 +25,6 @@ app.get('/testing', function(req,res){
     res.sendFile("./public/testing.html", {root: './'});
 })
 
-app.get('/api', function(req, res) {
-  console.log(req.query);
-  //var breweryUrl = `http://api.brewerydb.com/v2/beers?name=Fat+Tire&key=58bc55fe9138082bf63a6f6ff8c1c861`;
-  var breweryUrl = `http://api.brewerydb.com/v2/locations?locality=${req.query.locality}&region=${req.query.region}&key=58bc55fe9138082bf63a6f6ff8c1c861`;
-  request(breweryUrl, function(err, response, body) {
-    console.log("started API request");
-    console.log(response)
-    console.log(body)
-    //res.send(response)
-    res.send(body)
-  })
-})
-
-app.get('/apiZip', function(req, res) {
-  console.log(req.query);
-  var breweryUrl = `http://api.brewerydb.com/v2/locations?postalCode=${req.query.postalCode}&key=58bc55fe9138082bf63a6f6ff8c1c861`;
-  request(breweryUrl, function(err, response, body) {
-    //console.log(response)
-    console.log(body.data)
-    //res.send(response)
-    res.send(body)
-  })
-})
 
 app.listen(8080, function() {
   console.log('The app is running on 8080');

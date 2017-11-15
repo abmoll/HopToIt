@@ -1,5 +1,15 @@
 //any code inside doc ready wont run until html is loaded on page
 
+// import 'vue-googlemaps/dist/vue-googlemaps.css';
+// import VueGoogleMaps from 'vue-googlemaps';
+//
+// Vue.use(VueGoogleMaps, {
+//   load: {
+//     apiKey: 'AIzaSyC46J7DlCyI-jZLtGueSXja2uDkdDEJYRA',
+//     libraries: ['places'],
+//   },
+// })
+
 var mainVm = new Vue({
   el: '#app',
   data: {
@@ -10,8 +20,17 @@ var mainVm = new Vue({
       lat: '',
       long: '',
       website: ''
-    }
+    },
+    breweryString: [],
   },
+
+  // watch: {
+  //     breweries: function() {
+  //         if (this.breweries.length > 0) this.buildPins();
+  //     },
+
+  // },
+
   methods: {
 
     removeBrewery: function(item, event) {
@@ -23,6 +42,60 @@ var mainVm = new Vue({
       //       console.log(data)
       //  })
     },
+
+
+    initMap: function() {
+      this.directionsService = new google.maps.DirectionsService;
+      this.directionsDisplay = new google.maps.DirectionsRenderer;
+
+          console.log("map: ", google.maps)
+              this.map = new google.maps.Map(document.getElementById('map'), {
+              center: {lat:61.180059, lng: -149.822075},
+              scrollwheel: false,
+              zoom: 4
+            });
+        this.directionsDisplay.setMap(this.map);
+    },
+
+    buildPins: function() {
+this.directionsDisplay.setMap(this.map);
+      var vm = this;
+      var address = mainVm.breweries
+      console.log(address)
+      console.log(typeof address)
+      var geocoder = new google.maps.Geocoder;
+      // libraries to get place information
+      var infowindow = new google.maps.InfoWindow();
+      var infowindowContent = document.getElementById('infowindowContent')
+      infowindow.setContent(infowindowContent);
+      var service = new google.maps.places.PlacesService(map);
+      for (var i=0; i < address.length; i++) {
+        console.log(address[i])
+        geocoder.geocode({'address': address[i].brewery.name}, function(results, status) {
+          service.getDetails({
+            placeId: results[0].place_id}, function(place, status) {
+              if (status === google.maps.places.PlacesServiceStatus.OK) {
+                // console.log(place)
+
+          if (status === 'OK') {
+            // console.log(place)
+            // map.setCenter(results[0].geometry.location);
+            console.log(results[0].place_id)
+            var marker = new google.maps.Marker({
+              map: vm.map,
+              position: results[0].geometry.location
+            });
+          } else {
+            alert('Geocode was not successful for the following reason: ' + status);
+          }
+        }
+
+
+      })
+        });
+      }
+    }
+
   },
 })
 
@@ -34,8 +107,8 @@ $("#form").submit(function(event) {
   var zip = document.getElementById("postalCode").value;
 
   $.get('/', function(data) {})
-
-  $.get(`/api?locality=${city}&region=${state}`, function(body, status) {
+  //
+  $.get(`/api?locality=${city}&region=${state}`, function(body,status) {
     //$.get(`/api?postalCode=${zip}`, function(body, status) {
     //displayResults() function
     if (city !== '' && state !== '') {
@@ -44,7 +117,7 @@ $("#form").submit(function(event) {
         for (var i = 0; i < body.data.length; i++) {
           body.data[i].hidden = false;
         }
-        console.log(body);
+
       }
       mainVm.breweries = body.data;
     }
@@ -54,14 +127,84 @@ $("#form").submit(function(event) {
     //displayResults() function
     if (zip !== '') {
       body = JSON.parse(body);
-      console.log(body.data);
+
+      var address = [];
       if (body.data !== undefined) {
         for (var i = 0; i < body.data.length; i++) {
           body.data[i].hidden = false;
+          address.push(body.data[i].brewery.name);
         }
+        // console.log(body);
+        mainVm.breweryString = address;
+        console.log(mainVm.breweryString)
       }
-      mainVm.breweries = body.data;
-    }
-  })
+      mainVm.breweries = body.data
+      mainVm.buildPins();
 
+    }
+    console.log(typeof mainVm.breweryString)
+  })
 })
+
+
+//
+// function initMap(breweryNames) {
+//   console.log(breweryNames)
+//   var map = new google.maps.Map(document.getElementById('map'), {
+//     zoom: 8,
+//     center: {lat: -34.397, lng: 150.644}
+//   });
+//   var geocoder = new google.maps.Geocoder;
+//   // libraries to get place information
+//   var infowindow = new google.maps.InfoWindow();
+//   var infowindowContent = document.getElementById('infowindowContent')
+//   infowindow.setContent(infowindowContent);
+//   var service = new google.maps.places.PlacesService(map);
+//
+//
+// //   geocodeAddress(geocoder, map);
+// //
+// // }
+// //
+// // function geocodeAddress(geocoder, resultsMap) {
+//
+//   // store location names in an array of strings
+//
+//
+//
+//
+//
+// console.log(address)
+//
+//
+//
+//   // loop over array and make a marker for each brewery
+//   for (var i=0; i < address.length; i++) {
+//
+//
+//     geocoder.geocode({'address': address[i]}, function(results, status) {
+//
+//       service.getDetails({
+//
+//         placeId: results[0].place_id}, function(place, status) {
+//           if (status === google.maps.places.PlacesServiceStatus.OK) {
+//             // console.log(place)
+//
+//       if (status === 'OK') {
+//         // console.log(place)
+//         map.setCenter(results[0].geometry.location);
+//         console.log(results[0].place_id)
+//         var marker = new google.maps.Marker({
+//           map: map,
+//           position: results[0].geometry.location
+//         });
+//       } else {
+//         alert('Geocode was not successful for the following reason: ' + status);
+//       }
+//     }
+//
+//
+//   })
+//     });
+//   }
+// }

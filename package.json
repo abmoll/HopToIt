@@ -17,6 +17,9 @@
     "express-session": "^1.15.6",
     "mongodb": "^2.2.33",
     "mongoose": "^4.13.2",
-    "request": "^2.83.0"
+    "request": "^2.83.0",
+    "vue": "^2.5.3",
+    "vue-googlemaps": "0.0.6",
+    "vue-router": "^3.0.1"
   }
 }

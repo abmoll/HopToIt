@@ -1,157 +1,109 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>PlaceID Geocoder</title>
-    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
-    <meta charset="utf-8">
-    <style>
-      /* Always set the map height explicitly to define the size of the div
-       * element that contains the map. */
-      #map {
-        height: 100%;
-      }
-      /* Optional: Makes the sample page fill the window. */
-      html, body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-      }
-      .controls {
-        background-color: #fff;
-        border-radius: 2px;
-        border: 1px solid transparent;
-        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-        box-sizing: border-box;
-        font-family: Roboto;
-        font-size: 15px;
-        font-weight: 300;
-        height: 29px;
-        margin-left: 17px;
-        margin-top: 10px;
-        outline: none;
-        padding: 0 11px 0 13px;
-        text-overflow: ellipsis;
-        width: 400px;
-      }
 
-      .controls:focus {
-        border-color: #4d90fe;
-      }
-      .title {
-        font-weight: bold;
-      }
-      #infowindow-content {
-        display: none;
-      }
-      #map #infowindow-content {
-        display: inline;
-      }
+<head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="./style.css">
+  <title>HopToIt</title>
+</head>
+<body>
+  <p>
+    <h1>HopToIt</h1>
+  <p>Enter City and State OR Zip Code to Search for Breweries</p>
 
-    </style>
-  </head>
-  <body>
+  <form id="form">
+    <input id="locality" type="text" placeholder="City"><br>
+    <input id="region" type="text" placeholder="State"><br><br>
+    <input id="postalCode" type="text" placeholder="Zip Code"><br>
+    <input id="submitButton" type="submit" value="Submit"><br>
+  </form>
+  <div class="theScreen"></div>
 
-				<div class="login-form">
-					<form action="/signUp" method="post">
-						<input type="text" name="email" placeholder="E-mail" required="">
-						<input type="text" name="username" placeholder="Username" required="">
-						<input type="password" name="password" placeholder="Password" required="">
-						<input type="password" name="passwordConf" placeholder="Confirm Password" required="">
-						<input type="submit" value="REGISTER">
-					</form>
-				</div>
-
-<p>login</p>
-<div class="login-form">
-					<form action="/login" method="post">
-						<input type="text" name="logemail" placeholder="E-mail" required="">
-						<input type="password" name="logpassword" placeholder="Password" required="">
-						<div class="tp">
-							<input type="submit" value="LOGIN NOW">
-						</div>
-					</form>
-				</div>
+  <link href="style.css" type="text/css" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.3/vue.js"></script>
 
 
-<!--
-    <input id="pac-input" class="controls" type="text"
-        placeholder="Enter a location">
-        <input id="submit" type="submit"> -->
-    <!-- <div id="map"></div>
-    <div id="infowindow-content">
-      <span id="place-name"  class="title"></span><br>
-      Place ID <span id="place-id"></span><br>
-      <span id="place-address"></span>
+      <div id="app">
+        <h2>Brewery Results</h2>
+        <h3 v-if='breweries === undefined'>No results found</h3>
+        <form v-for="(item,index) in breweries" v-on:submit='removeBrewery(item, $event)' v-if='!item.hidden && index<10'>
+          <p>{{item.brewery.name}}</p>
+          <p>{{item.streetAddress}}</p>
+          <p>{{item.locality}}, {{item.region}} {{item.postalCode}}</p>
+          <p>{{item.website}}</p>
+          <input id="delete" type="submit" value="Delete">
+          <br><br>
+        </form>
+        <input id="startLoc" type="text" placeholder="Enter start point"><br>
+      </div>
 
-    </div>
-
+      <div id="map"></div>
+      <div id="infowindowContent">
+        <span id="place-name" class="title"></span><br>
+        Place ID <span id="place-id"></span><br>
+        <span id="place-address"></span>
+      </div>
     <script>
-      // This sample uses the Place Autocomplete widget requesting only a place
-      // ID to allow the user to search for and locate a place. The sample
-      // then reverse geocodes the place ID and displays an info window
-      // containing the place ID and other information about the place that the
-      // user has selected.
-
-      // This example requires the Places library. Include the libraries=places
-      // parameter when you first load the API. For example:
-      // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
-
-      function initMap() {
-        var map = new google.maps.Map(document.getElementById('map'), {
-          center: {lat: -33.8688, lng: 151.2195},
-          zoom: 13
-        });
-
-        var input = document.getElementById('pac-input');
-
-        var autocomplete = new google.maps.places.Autocomplete(
-            input, {placeIdOnly: true});
-        autocomplete.bindTo('bounds', map);
-
-        map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
-
-        var infowindow = new google.maps.InfoWindow();
-        var infowindowContent = document.getElementById('infowindow-content');
-        infowindow.setContent(infowindowContent);
-        var geocoder = new google.maps.Geocoder;
-        var marker = new google.maps.Marker({
-          map: map
-        });
-        marker.addListener('click', function() {
-          infowindow.open(map, marker);
-        });
-
-        autocomplete.addListener('place_changed', function() {
-          infowindow.close();
-          var place = autocomplete.getPlace();
-
-          if (!place.place_id) {
-            return;
-          }
-          geocoder.geocode({'placeId': place.place_id}, function(results, status) {
-
-            if (status !== 'OK') {
-              window.alert('Geocoder failed due to: ' + status);
-              return;
-            }
-            map.setZoom(11);
-            map.setCenter(results[0].geometry.location);
-            // Set the position of the marker using the place ID and location.
-            marker.setPlace({
-              placeId: place.place_id,
-              location: results[0].geometry.location
-            });
-            marker.setVisible(true);
-            infowindowContent.children['place-name'].textContent = place.name;
-            infowindowContent.children['place-id'].textContent = place.place_id;
-            infowindowContent.children['place-address'].textContent =
-                results[0].formatted_address;
-            infowindow.open(map, marker);
-          });
-        });
-      }
+      // function initMap() {
+      //   var map = new google.maps.Map(document.getElementById('map'), {
+      //     zoom: 8,
+      //     center: {lat: -34.397, lng: 150.644}
+      //   });
+      //   var geocoder = new google.maps.Geocoder;
+      //   // libraries to get place information
+      //   var infowindow = new google.maps.InfoWindow();
+      //   var infowindowContent = document.getElementById('infowindowContent')
+      //   infowindow.setContent(infowindowContent);
+      //   var service = new google.maps.places.PlacesService(map);
+      //
+      //
+      // //   geocodeAddress(geocoder, map);
+      // //
+      // // }
+      // //
+      // // function geocodeAddress(geocoder, resultsMap) {
+      //
+      //   // store location names in an array of strings
+      //   var address = ["weldwerks brewing", "new belgium brewery"]
+      //   // loop over array and make a marker for each brewery
+      //   for (var i=0; i < address.length; i++) {
+      //
+      //
+      //     geocoder.geocode({'address': address[i]}, function(results, status) {
+      //
+      //       service.getDetails({
+      //         placeId: results[0].place_id}, function(place, status) {
+      //           if (status === google.maps.places.PlacesServiceStatus.OK) {
+      //             // console.log(place)
+      //
+      //       if (status === 'OK') {
+      //         console.log(place)
+      //         map.setCenter(results[0].geometry.location);
+      //         console.log(results[0].place_id)
+      //         var marker = new google.maps.Marker({
+      //           map: map,
+      //           position: results[0].geometry.location
+      //         });
+      //       } else {
+      //         alert('Geocode was not successful for the following reason: ' + status);
+      //       }
+      //     }
+      //
+      //
+      //   })
+      //     });
+      //   }
+      // }
     </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC46J7DlCyI-jZLtGueSXja2uDkdDEJYRA&libraries=places&callback=initMap"
-        async defer></script> -->
-  </body>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="./main.js"></script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC46J7DlCyI-jZLtGueSXja2uDkdDEJYRA&libraries=places&callback=mainVm.initMap">
+    </script>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+
+</body>
+
 </html>

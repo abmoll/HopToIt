@@ -22,8 +22,10 @@ var UserSchema = new mongoose.Schema({
 
 //authenticate input against database
 UserSchema.statics.authenticate = function (email, password, callback) {
+  // search for user email in database
   User.findOne({ email: email })
     .exec(function (err, user) {
+      // catch errors and user not found situations
       if (err) {
         console.log("user.js")
         return callback(err)
@@ -32,9 +34,12 @@ UserSchema.statics.authenticate = function (email, password, callback) {
         err.status = 401;
         return callback(err);
       }
+      // compares user password to database password
       bcrypt.compare(password, user.password, function (err, result) {
+        // if password match send the callback function back with user info
         if (result === true) {
           return callback(null, user);
+        // if user not found pass empty callback function to return an error
         } else {
           return callback();
         }
@@ -55,5 +60,6 @@ UserSchema.pre('save', function (next) {
 });
 
 
+// export user for use in other files
 var User = mongoose.model('User', UserSchema);
 module.exports = User;
