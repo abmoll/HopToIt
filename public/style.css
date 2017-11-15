@@ -6,6 +6,14 @@ body {
 
 }
 
+#all {
+  margin: 25px;
+}
+
+a {
+  color: #16497C;
+}
+
 .boxed {
   border: 1px solid grey;
   border-radius: 5px;
