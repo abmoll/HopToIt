@@ -1,126 +1,67 @@
-$(document).ready(function() {
-  console.log("ready!");
-  //any code inside doc ready wont run until html is loaded on page
+//any code inside doc ready wont run until html is loaded on page
 
-  var mainVm = new Vue({
-      el: '#app',
-      data: {
-          breweries: [],
-          newBrewery: {
-              name: '',
-              address: '',
-              lat: '',
-              long: ''
-          }
-      },
-      methods: {
-          addBrewery: function(event){
-              event.preventDefault()
-              // $().serialize() will grab all the named inputs in the form, and put their values into a url-encoded string
-              $.post('/add', mainVm.newTodo, (data)=>{
-                  //
-                  mainVm.newTodo = {}
-                  console.log(data)
-                  mainVm.getFreshData()
-                  //this.todos.push(data)
-              })
-          },
+var mainVm = new Vue({
+  el: '#app',
+  data: {
+    breweries: [],
+    newBrewery: {
+      name: '',
+      address: '',
+      lat: '',
+      long: '',
+      website: ''
+    }
+  },
+  methods: {
 
-          removeBrewery: function(item){
-              $.post('/remove', item,(data)=>{
-                  mainVm.getFreshData()
-                  //send the object to be removed
-                  console.log(data)
-              })
-          },
-
-          getFreshData: function(){
-              $.get('/todo', function(data){
-                  mainVm.todos = data
-              })
-          },
-      },
-
-      created: function(){
-          this.getFreshData()
-      }
-  })
+    removeBrewery: function(item, event) {
+      event.preventDefault();
+      item.hidden = true;
+      //   $.post('/remove', item,(data)=>{
+      //       mainVm.getFreshData()
+      //       //send the object to be removed
+      //       console.log(data)
+      //  })
+    },
+  },
+})
 
 // add two different forms
-  $("#form").submit(function(event) {
-    event.preventDefault();
-    var city = document.getElementById("locality").value;
-    var state = document.getElementById("region").value;
-    var zip = document.getElementById("postalCode").value;
+$("#form").submit(function(event) {
+  event.preventDefault();
+  var city = document.getElementById("locality").value;
+  var state = document.getElementById("region").value;
+  var zip = document.getElementById("postalCode").value;
 
-    //if city or state has a value, then disable zip and vice versa
-    //document.getElementById('foo').disabled = true;
-    // $('#locality').keydown(function() {
-    //   $("#postalCode").prop("disabled", true);
-    // });
+  $.get('/', function(data) {})
 
-    $.get('/', function(data) {})
-
-    $.get(`/api?locality=${city}&region=${state}`, function(body, status) {
-      //$.get(`/api?postalCode=${zip}`, function(body, status) {
-      //displayResults() function
+  $.get(`/api?locality=${city}&region=${state}`, function(body, status) {
+    //$.get(`/api?postalCode=${zip}`, function(body, status) {
+    //displayResults() function
+    if (city !== '' && state !== '') {
       body = JSON.parse(body);
-      console.log(body);
-      console.log(body.data[0].brewery.name);
-      console.log(body.data[0].streetAddress);
-      console.log(body.data[0].latitude);
-      console.log(body.data[0].longitude);
-      console.log(body.data[0].website);
-      for (var i in body.data) {
-        if (i < 5) {
-          $(".theScreen").append("<br><p>" + body.data[i].brewery.name)
-          $(".theScreen").append("<p>" + body.data[i].streetAddress)
-          $(".theScreen").append("<p>" + body.data[i].website + "</p>")
-          // v-for and vue
+      if (body.data !== undefined) {
+        for (var i = 0; i < body.data.length; i++) {
+          body.data[i].hidden = false;
         }
+        console.log(body);
       }
-    })
-
+      mainVm.breweries = body.data;
+    }
   })
 
-});
+  $.get(`/apiZip?postalCode=${zip}`, function(body, status) {
+    //displayResults() function
+    if (zip !== '') {
+      body = JSON.parse(body);
+      console.log(body.data);
+      if (body.data !== undefined) {
+        for (var i = 0; i < body.data.length; i++) {
+          body.data[i].hidden = false;
+        }
+      }
+      mainVm.breweries = body.data;
+    }
+  })
 
-  //$(".theScreen").append("<br><p>Asteroid Name: " + data.near_earth_objects[day][i].name + "</p>")
-  //$(".theScreen").append("<p>Velocity MPH: " + Math.round(data.near_earth_objects[day][i].close_approach_data[0].relative_velocity.miles_per_hour) + "</p>")
-  // $(".theScreen").append("<p>Max Diameter Feet: " + Math.round(data.near_earth_objects[day][i].estimated_diameter.feet.estimated_diameter_max) + "</p>")
-
-//   $('#validate').click(function() {
-//     alert("validating")
-//     if (document.getElementById('totFunds').value < 0) {
-//       alert("you do not have enough funds")
-//       document.getElementById("validate").style.border = "thick solid #DC143C";
-//     }
-//     }
-//     $.post("/validate-cargo", {
-//         weight: weight,
-//         fund: fund,
-//         stuff: [{
-//             //item: "azamat",
-//             item: "azamat",
-//             numItems: azamat
-//           },
-//           {
-//             item: "flag",
-//             numItems: flag
-//           }
-//         ]
-//       },
-//       function(data, status) {
-//         alert("Data: " + data + "\nStatus: much " + status);
-//       });
-//   });
-//
-
-//send start and end dates to the server
-// for (var i in hazardous) {
-//   // for loop around hazardous .append hazardous.name ...
-//   $(".theScreen").append("<br><p>Asteroid Name: " + hazardous[i].name + "</p>")
-//   $(".theScreen").append("<p>Velocity MPH: " + Math.round(hazardous[i].close_approach_data[0].relative_velocity.miles_per_hour) + "</p>");
-//   $(".theScreen").append("<p>Max Diameter Feet: " + Math.round(hazardous[i].estimated_diameter.feet.estimated_diameter_max) + "</p>");
-//   $(".theScreen").append("<p>Distance from Earth in Miles: " + hazardous[i].close_approach_data[0].miss_distance.miles + "</p>");
-// }
+})

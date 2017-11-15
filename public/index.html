@@ -1,73 +1,47 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="./style.css">
-<title>HopToIt</title>
-    <link href="style.css" type="text/css" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.3/vue.js"></script>
-  </head>
-  <body>
-  <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
-    <div class="carousel-inner">
-      <div class="carousel-item active">
-        <img class="d-block w-100" src="images/header.jpg">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="./style.css">
+  <title>HopToIt</title>
+</head>
+<body>
+  <p>
+    <h1>HopToIt</h1>
+  <p>Enter City and State OR Zip Code to Search for Breweries</p>
+
+  <form id="form">
+    <input id="locality" type="text" placeholder="City"><br>
+    <input id="region" type="text" placeholder="State"><br><br>
+    <input id="postalCode" type="text" placeholder="Zip Code"><br>
+    <input type="submit" value="Submit"><br>
+  </form>
+  <div class="theScreen"></div>
+
+  <link href="style.css" type="text/css" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.3/vue.js"></script>
+
+
+      <div id="app">
+        <h2>Brewery Results</h2>
+        <h3 v-if='breweries === undefined'>No results found</h3>
+        <form v-for="(item,index) in breweries" v-on:submit='removeBrewery(item, $event)' v-if='!item.hidden && index<10'>
+          <p>{{item.brewery.name}}</p>
+          <p>{{item.streetAddress}}</p>
+          <p>{{item.locality}}, {{item.region}} {{item.postalCode}}</p>
+          <p>{{item.website}}</p>
+          <input id="delete" type="submit" value="Delete">
+          <br><br>
+        </form>
       </div>
-    </div>
-  </div>
- 	  <h1>Welcome to HopToIt!!</h1>
+      <input id="startLoc" type="text" placeholder="Enter start point"><br>
+    </p>
 
-  <h2>Enter Location to Search for Breweries and Beer</h2>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+    <script src=./main.js></script>
 
-	<div>
-	  <form id="form">
-		<input id="locality" type="text" placeholder="City"><br>
-		<input id="region" type="text" placeholder="State"><br>
-		<input id="postalCode" type="text" placeholder="Zip Code"><br>
-		<input type="submit" value="Submit">
-	  </form>
-	</div>
-	  
-	  <div class="theScreen"></div>
+</body>
 
-		
-
-		<p>
-		  <div class="col-sm-9 col-xs-12">
-		  <div id="app">
-			<h2>
-			  <th>Todo Items</th>
-			</h2>
-
-			  <form v-on:submit="addBrewery">
-				<input v-model="newTodo.text" placeholder="enter todo">
-				<input v-model="newTodo.priority" placeholder="enter priority">
-				<!-- even though this is a range input, its value is always a string -->
-				<input type="submit" value="Submit">
-			  </form>
-			  <form v-on:submit="sort">
-				<input type="submit" value="Sort">
-			  </form>
-			  <br>
-			  <table class="table table-hover">
-				<tr v-for="item in todos">
-				  <td>{{item.text}}</td>
-				  <td>{{item.priority}}</td>
-				  <td v-on:click=removeTodo(item)>
-					<input id="delete" type="submit" value="x">
-				  </td>
-				</tr>
-			  </table>
-			</div>
-		  </div>
-		</p>
-	</div> 
-</div>
-  
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
-  <script src=./main.js></script>
-
-
-  </body>
-  </html>
+</html>
