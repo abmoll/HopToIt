@@ -14,12 +14,28 @@ var mainVm = new Vue({
   },
   methods: {
 
-    removeBrewery: function(item, event) {
+    removeBrewery: function(item, index, event) {
+      //console.log(index)
       event.preventDefault();
       item.hidden = true;
-      //   $.post('/remove', item,(data)=>{
+      //console.log("item: " + item)
+      //var dbId = {id: objectid}
+      mainVm.breweries.splice(1,index)
+
+      // $.post('/remove', dbId, (data)=>{
+      // db.collection.deleteOne()
+      //   db remove command sendDB_ID
+      //   mainVm.$forceUpdate();
+      //   send the object to be removed
+      // console.log("data: " + data)
+      // })
+    },
+    addBrewery: function(item, event) {
+      event.preventDefault();
+      console.log("item: " + item)
+      mainVm.breweries.push(item)
+      //$.post('/remove', item,(data)=>{
       //       mainVm.getFreshData()
-      //       //send the object to be removed
       //       console.log(data)
       //  })
     },

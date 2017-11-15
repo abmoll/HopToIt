@@ -35,13 +35,13 @@
   <div id="app">
     <h2>Brewery Results</h2>
     <h3 v-if='breweries === undefined'>No results found</h3>
-    <form v-for="(item,index) in breweries" v-on:submit='removeBrewery(item, $event)' v-if='!item.hidden && index<10'>
+    <form v-for="(item,index) in breweries" v-if='!item.hidden && index<10'>
       <p>{{item.brewery.name}}</p>
       <p>{{item.streetAddress}}</p>
       <!-- <p>{{item.locality}}, {{item.region}} {{item.postalCode}}</p> -->
       <p><a v-bind:href='item.website'>{{item.website}}</a></p>
-      <input id="add" type="submit" value="Add">
-      <input id="delete" type="submit" value="Delete">
+      <input id="add" type="submit" value="Add" v-on:click='addBrewery(item, $event)'>
+      <input id="delete" type="submit" value="Delete" v-on:click='removeBrewery(item, index, $event)'>
       <br><br>
     </form>
   </div>

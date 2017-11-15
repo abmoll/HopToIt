@@ -18,15 +18,18 @@ app.get('/server', function(request, response) {
     console.log("yes")
 });
 
+app.post('/remove', function(request, response) {
+    console.log("data: " + data)
+    console.log("item: " + item)
+    response.send(response)
+});
+
 app.get('/api', function(req, res) {
   console.log(req.query);
   //var breweryUrl = `http://api.brewerydb.com/v2/beers?name=Fat+Tire&key=58bc55fe9138082bf63a6f6ff8c1c861`;
   var breweryUrl = `http://api.brewerydb.com/v2/locations?locality=${req.query.locality}&region=${req.query.region}&key=58bc55fe9138082bf63a6f6ff8c1c861`;
   request(breweryUrl, function(err, response, body) {
     console.log("started API request");
-    //console.log(response)
-    //console.log(body)
-    //res.send(response)
     res.send(body)
   })
 })
