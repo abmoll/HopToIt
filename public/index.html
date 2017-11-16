@@ -10,14 +10,7 @@
 </head>
 
 <body>
-  <div id="all">
-    <div id="carousel" class="carousel slide" data-ride="carousel">
-      <div class="carousel-inner">
-        <div class="carousel-item active">
-          <img class="d-block w-100" src="images/header.jpg">
-        </div>
-      </div>
-    </div>
+
   <p>
     <h1>HopToIt</h1>
     <div class="login-form">
@@ -40,18 +33,32 @@
         </div>
       </form>
     </div>
-  <p>Enter City and State OR Zip Code to Search for Breweries</p>
+
+  <div class="theScreen"></div>
+
+  <link href="style.css" type="text/css" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.3/vue.js"></script>
+
+  <div id="all">
+    <div id="carousel" class="carousel slide" data-ride="carousel">
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img class="d-block w-100" src="images/header.jpg">
+        </div>
+      </div>
+    </div>
 
     <div class="headline">
       <h1>Welcome to Hop To It!</h1>
       <h2>Your guide to the best breweries and beers in the country!</h2>
     </div>
 
-    
+
 
 <div class="first-container">
     <div class="beer-history">
       <p>Beer is one of the oldest beverages humans have produced, dating back to at least the 5th millennium BC in Iran, and was recorded in the written history of ancient Egypt and Mesopotamia and spread throughout the world.</p>
+
 
       <p>The invention of bread and beer has been argued to be responsible for humanity's ability to develop technology and build civilization.[5][6][7] The earliest chemically confirmed barley beer to date was discovered at Godin Tepe in the central Zagros Mountains of Iran, where fragments of a jug, from between 5400 and 5000 years ago was found to be coated with beerstone, a by-product of the brewing process.[8]</p>
 
@@ -76,10 +83,12 @@
           <input id="postalCode" type="text" placeholder="Zip Code"><br>
           <input type="submit" value="Submit"><br><br>
         </form>
-        
+      </div>
+    </div>
       <div class="theScreen"></div>
 
       <div id="app">
+
         <h2>Brewery Results</h2>
         <h3 v-if="breweries === undefined">No results found</h3>
           <div v-for="(item,index) in breweries" v-if="!item.hidden && index<10">
@@ -88,41 +97,60 @@
             <p>{{item.locality}}, {{item.region}} {{item.postalCode}}</p>
             <p><a v-bind:href="item.website">{{item.website}}</a></p>
             <input id="delete" type="button" v-on:click="removeBrewery(item, index, $event)" value="Delete">
-            <input type="button" value="Add to Route" v-on:click="addBrewery(item, $event)">
+            <input type="button" value="Add to Route" v-if="user !== undefined" v-on:click="addBrewery(item, $event)">
           </div>
           <br><br>
           <form action="/getRoute" method="get">
             <input id="startLoc" type="text" name="startLocation" placeholder="Enter start point"><br>
             <input type="submit" value="Get Route" >
           </form>
-        </div>
-      <div id="map">
-      <div id="infowindowcontent">
-        <span id="place-name" class="title"></span><br>
-        <span id="place-id"></span><br>
-        <span id="place-address"></span>
-      </div>
-      </div>
-
-  <!-- Right Column -->
-          <div class="col-sm-6">
-            <div class="container">
-              <p>Map of brewery locations</p>
-              <img src="topo-co.jpg" width=600px>
+        <!-- Right Column -->
+        <div class="col-sm-6">
+          <div class="container">
+            <div id="map">
+            <div id="infowindowcontent">
+              <span id="place-name" class="title"></span><br>
+              <span id="place-id"></span><br>
+              <span id="place-address"></span>
+            </div>
             </div>
           </div>
         </div>
+
       </div>
+
+
 </div>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="./main.js"></script>
-    <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC46J7DlCyI-jZLtGueSXja2uDkdDEJYRA&libraries=places&callback=mainVm.initMap">
-    </script>
 
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
 
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+
+        <h2 class="brewery-results">Brewery Results</h2>
+        <h3 v-if='breweries === undefined'>No results found</h3>
+        <form v-for="(item,index) in breweries" v-on:submit='removeBrewery(item, $event)' v-if='!item.hidden && index<10'>
+          <p class="brewery-results">{{item.brewery.name}}</p>
+          <p class="brewery-results">{{item.streetAddress}}</p>
+          <p class="brewery-results"><a v-bind:href='item.website'>{{item.website}}</a></p>
+          <input id="add" type="submit" value="Add">
+          <input id="delete" type="submit" value="Delete">
+
+        </form>
+        </div>
+        <input id="startLoc" type="text" placeholder="Enter start point"><br>
+      </div>
+    </div> -->
+
+
+
+</div>
+
+</div>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="./main.js"></script>
+<script async defer
+src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC46J7DlCyI-jZLtGueSXja2uDkdDEJYRA&libraries=places&callback=mainVm.initMap">
+</script>
 </body>
 
 </html>
