@@ -9,6 +9,26 @@
 <body>
   <p>
     <h1>HopToIt</h1>
+    <div class="login-form">
+      <form action="/signUp" method="post">
+        <input type="text" name="email" placeholder="E-mail" required="">
+        <input type="text" name="username" placeholder="Username" required="">
+        <input type="password" name="password" placeholder="Password" required="">
+        <input type="password" name="passwordConf" placeholder="Confirm Password" required="">
+        <input type="submit" value="REGISTER">
+      </form>
+    </div>
+
+<p>login</p>
+    <div class="login-form">
+      <form action="/login" method="post">
+        <input type="text" name="logemail" placeholder="E-mail" required="">
+        <input type="password" name="logpassword" placeholder="Password" required="">
+        <div class="tp">
+          <input type="submit" value="LOGIN NOW">
+        </div>
+      </form>
+    </div>
   <p>Enter City and State OR Zip Code to Search for Breweries</p>
 
   <form id="form">
@@ -35,7 +55,7 @@
             <input type="button" value="Add to Route" v-on:click="addBrewery(item, $event)">
           </div>
           <br><br>
-          <form action="/getRoute" method="post">
+          <form action="/getRoute" method="get">
             <input id="startLoc" type="text" name="startLocation" placeholder="Enter start point"><br>
             <input type="submit" value="Get Route" >
           </form>
@@ -48,58 +68,6 @@
       </div>
       </div>
 
-    <script>
-      // function initMap() {
-      //   var map = new google.maps.Map(document.getElementById('map'), {
-      //     zoom: 8,
-      //     center: {lat: -34.397, lng: 150.644}
-      //   });
-      //   var geocoder = new google.maps.Geocoder;
-      //   // libraries to get place information
-      //   var infowindow = new google.maps.InfoWindow();
-      //   var infowindowContent = document.getElementById('infowindowContent')
-      //   infowindow.setContent(infowindowContent);
-      //   var service = new google.maps.places.PlacesService(map);
-      //
-      //
-      // //   geocodeAddress(geocoder, map);
-      // //
-      // // }
-      // //
-      // // function geocodeAddress(geocoder, resultsMap) {
-      //
-      //   // store location names in an array of strings
-      //   var address = ["weldwerks brewing", "new belgium brewery"]
-      //   // loop over array and make a marker for each brewery
-      //   for (var i=0; i < address.length; i++) {
-      //
-      //
-      //     geocoder.geocode({'address': address[i]}, function(results, status) {
-      //
-      //       service.getDetails({
-      //         placeId: results[0].place_id}, function(place, status) {
-      //           if (status === google.maps.places.PlacesServiceStatus.OK) {
-      //             // console.log(place)
-      //
-      //       if (status === 'OK') {
-      //         console.log(place)
-      //         map.setCenter(results[0].geometry.location);
-      //         console.log(results[0].place_id)
-      //         var marker = new google.maps.Marker({
-      //           map: map,
-      //           position: results[0].geometry.location
-      //         });
-      //       } else {
-      //         alert('Geocode was not successful for the following reason: ' + status);
-      //       }
-      //     }
-      //
-      //
-      //   })
-      //     });
-      //   }
-      // }
-    </script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="./main.js"></script>
     <script async defer
