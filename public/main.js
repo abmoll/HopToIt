@@ -33,14 +33,24 @@ var mainVm = new Vue({
 
   methods: {
 
-    removeBrewery: function(item, event) {
+    removeBrewery: function(item, index, event) {
+      //console.log(index)
       event.preventDefault();
       item.hidden = true;
-      //   $.post('/remove', item,(data)=>{
-      //       mainVm.getFreshData()
-      //       //send the object to be removed
-      //       console.log(data)
-      //  })
+      //console.log("item: " + item)
+      //var dbId = {id: objectid}
+      mainVm.breweries.splice(1,index)
+      $.post('/remove', item, (data)=>{
+        mainVm.$forceUpdate();
+      })
+    },
+
+    addBrewery: function(item, event) {
+      event.preventDefault();
+      //mainVm.breweries.push(item)
+      $.post('/add', item, (data)=>{
+
+      })
     },
 
 
@@ -76,31 +86,42 @@ var mainVm = new Vue({
       var infowindowContent = document.getElementById('infowindowcontent')
       var service = new google.maps.places.PlacesService(vm.map);
       var geocoder = new google.maps.Geocoder;
-
-      // run geocoder to turn string into usable coordinates
+      // Build the marker pins
       for (var i=0; i < address.length; i++) {
+        // run geocoder to turn string into usable coordinates
           geocoder.geocode({'address': address[i].streetAddress + address[i].region}, function(results, status) {
             if (status === 'OK') {
-              vm.map.setZoom(13)
+              // sets map zoom level
+              vm.map.setZoom(12)
+              // sets map center at first brewery in the list
               vm.map.setCenter(results[0].geometry.location);
             }
+            // error handling for geocoder
             else {
               alert('Geocode was not successful for the following reason: ' + status);
             }
+            // build a pin and place it at the position (location came from string passed into geocoder)
             var marker = new google.maps.Marker({
+              // what map to place pin on
               map: vm.map,
+              // where to place pin (in a callback function so we are accessing the data after geocode returns our data in `results`)
               position: results[0].geometry.location
             });
 
+          // call google places service for detailed information about the location
           service.getDetails({placeId: results[0].place_id}, function(place, status) {
             if (status === google.maps.places.PlacesServiceStatus.OK) {
-                console.log(place)
-            };
+                console.log(this.place);
+            }
           });
 
+          // Add an on click event to the marker that will open a display box with brewery information
           marker.addListener('click', ()=>{
+            console.log(results);
+            // set the contents of the markers text box
             infowindow.setContent(`'<div><strong>Brewery '   '</strong><br>'
-            'Address: ' '<br>`);
+            'Address: '  ${mainVm.breweries[i]} '<br>`);
+            // open the display box
             infowindow.open(map, marker);
           });
         });
@@ -117,7 +138,6 @@ $("#form").submit(function(event) {
   var state = document.getElementById("region").value;
   var zip = document.getElementById("postalCode").value;
 
-  $.get('/', function(data) {})
   //
   $.get(`/api?locality=${city}&region=${state}`, function(body,status) {
     //$.get(`/api?postalCode=${zip}`, function(body, status) {
