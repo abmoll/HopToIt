@@ -5,7 +5,11 @@
 }
 
 a {
-  color: #ffffff;
+  color: blue;
+}
+
+#all {
+  margin: 15px;
 }
 
 a:hover {
@@ -19,7 +23,7 @@ a:hover {
 }
 
 .beer-history {
-  
+
 }
 
 .left-column {
