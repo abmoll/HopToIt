@@ -40,7 +40,7 @@
       <p>{{item.streetAddress}}</p>
       <!-- <p>{{item.locality}}, {{item.region}} {{item.postalCode}}</p> -->
       <p><a v-bind:href='item.website'>{{item.website}}</a></p>
-      <input id="add" type="submit" value="Add" v-on:click='addBrewery(item, $event)'>
+      <input id="add" type="submit" value="Add" v-if='user !=== undefined' v-on:click='addBrewery(item, $event)'>
       <input id="delete" type="submit" value="Delete" v-on:click='removeBrewery(item, index, $event)'>
       <br><br>
     </form>
