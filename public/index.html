@@ -25,18 +25,21 @@
 
       <div id="app">
         <h2>Brewery Results</h2>
-        <h3 v-if='breweries === undefined'>No results found</h3>
-        <form v-for="(item,index) in breweries" v-on:submit='removeBrewery(item, $event)' v-if='!item.hidden && index<10'>
-          <p>{{item.brewery.name}}</p>
-          <p>{{item.streetAddress}}</p>
-          <p>{{item.locality}}, {{item.region}} {{item.postalCode}}</p>
-          <p><a v-bind:href="item.website">{{item.website}}</a></p>
-          <input id="delete" type="submit" value="Delete">
+        <h3 v-if="breweries === undefined">No results found</h3>
+          <div v-for="(item,index) in breweries" v-if="!item.hidden && index<10">
+            <p>{{item.brewery.name}}</p>
+            <p>{{item.streetAddress}}</p>
+            <p>{{item.locality}}, {{item.region}} {{item.postalCode}}</p>
+            <p><a v-bind:href="item.website">{{item.website}}</a></p>
+            <input id="delete" type="button" v-on:click="removeBrewery(item, index, $event)" value="Delete">
+            <input type="button" value="Add to Route" v-on:submit="addBrewery(item, $event)">
+          </div>
           <br><br>
-        </form>
-        <input id="startLoc" type="text" placeholder="Enter start point"><br>
-      </div>
-
+          <form>
+            <input id="startLoc" type="text" placeholder="Enter start point"><br>
+            <input type="submit" value="Get Route" v-on:submit="getRoute()">
+          </form>
+        </div>
       <div id="map">
       <div id="infowindowcontent">
         <span id="place-name" class="title"></span><br>
@@ -44,6 +47,7 @@
         <span id="place-address"></span>
       </div>
       </div>
+
     <script>
       // function initMap() {
       //   var map = new google.maps.Map(document.getElementById('map'), {

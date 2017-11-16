@@ -1,15 +1,5 @@
 //any code inside doc ready wont run until html is loaded on page
 
-// import 'vue-googlemaps/dist/vue-googlemaps.css';
-// import VueGoogleMaps from 'vue-googlemaps';
-//
-// Vue.use(VueGoogleMaps, {
-//   load: {
-//     apiKey: 'AIzaSyC46J7DlCyI-jZLtGueSXja2uDkdDEJYRA',
-//     libraries: ['places'],
-//   },
-// })
-
 var mainVm = new Vue({
   el: '#app',
   data: {
@@ -24,35 +14,39 @@ var mainVm = new Vue({
     breweryString: [],
   },
 
-  // watch: {
-  //     breweries: function() {
-  //         if (this.breweries.length > 0) this.buildPins();
-  //     },
-
-  // },
-
   methods: {
 
     removeBrewery: function(item, index, event) {
       //console.log(index)
-      event.preventDefault();
+      // event.preventDefault();
       item.hidden = true;
       //console.log("item: " + item)
       //var dbId = {id: objectid}
-      mainVm.breweries.splice(1,index)
-      $.post('/remove', item, (data)=>{
+      var plusOne = index + 1;
+      console.log(index)
+      mainVm.breweries.splice(index, plusOne)
+      $.post('/remove', item, (data,res)=>{
+        console.log(res)
         mainVm.$forceUpdate();
       })
+      console.log(mainVm.breweries)
+      mainVm.initMap()
     },
 
     addBrewery: function(item, event) {
-      event.preventDefault();
+      // event.preventDefault();
       //mainVm.breweries.push(item)
       $.post('/add', item, (data)=>{
 
       })
     },
 
+    getRoute: function() {
+
+      $.post('/getRoute', item, (data,res)=>{
+        console.log(res)
+      })
+    },
 
     initMap: function() {
       this.directionsService = new google.maps.DirectionsService;
@@ -111,7 +105,7 @@ var mainVm = new Vue({
           // call google places service for detailed information about the location
           service.getDetails({placeId: results[0].place_id}, function(place, status) {
             if (status === google.maps.places.PlacesServiceStatus.OK) {
-                console.log(this.place);
+                console.log(place);
             }
           });
 
