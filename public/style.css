@@ -5,10 +5,11 @@
 }
 
 a {
-  color: #000000;
+  color: blue;
 }
+
 #all {
-  margin: 25px;
+  margin: 15px;
 }
 
 a:hover {
