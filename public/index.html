@@ -85,8 +85,8 @@
     </div>
       <div class="theScreen"></div>
 
-      <div id="app">
 
+      <div id="app">
         <h2>Brewery Results</h2>
         <h3 v-if="breweries === undefined">No results found</h3>
           <div v-for="(item,index) in breweries" v-if="!item.hidden && index<10">
@@ -95,7 +95,7 @@
             <p>{{item.locality}}, {{item.region}} {{item.postalCode}}</p>
             <p><a v-bind:href="item.website">{{item.website}}</a></p>
             <input id="delete" type="button" v-on:click="removeBrewery(item, index, $event)" value="Delete">
-            <input type="button" value="Add to Route" v-if="user !== undefined" v-on:click="addBrewery(item, $event)">
+            <input type="button" value="Add to Route"  v-on:click="addBrewery(item, $event)">
           </div>
           <br><br>
           <form action="/getRoute" method="get">
@@ -144,7 +144,7 @@
 </div>
 
 </div>
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
 <script src="./main.js"></script>
 <script async defer
 src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC46J7DlCyI-jZLtGueSXja2uDkdDEJYRA&libraries=places&callback=mainVm.initMap">
