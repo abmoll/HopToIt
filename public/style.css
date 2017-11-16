@@ -1,12 +1,99 @@
-body {
-  background-color: gray;
-  background-size: contain;
-  color: red;
-  font-family: sans-serif;
-
+.first-container {
+  background-image: url(images/pexels-photo-1600x2400.jpg);
+  margin-top: -10px;
+  padding-top: 5px;
 }
 
-.boxed {
+a {
+  color: #ffffff;
+}
+
+a:hover {
+  color: #16497C;
+}
+
+.headline {
+  background-color: #000000;
+  margin-top: -20px;
+  padding: 10px;
+}
+
+.beer-history {
+  
+}
+
+.left-column {
+  margin-top: 80px;
+}
+
+.brewery-results {
+  color: white;
+}
+
+.left-column-top-text {
+  color: white;
+  font-family: 'Vidaloka', serif;
+}
+
+h1 {
+  margin-top: 20px;
+  font-size: 3.5rem;
+  font-family: 'Vidaloka', serif;
+}
+
+h2 {
+  font-size: 2.0rem;
+  font-family: 'Vidaloka', serif;
+}
+
+h1, h2 {
+  text-align: center;
+  color: white;
+}
+
+.form-background-color {
+  background-color: grey;
+  border-radius: 20px;
+  padding: 25px;
+  opacity: 0.7;
+}
+
+input[type=text], select {
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    -webkit-transition: width 1.0s ease-in-out;
+    transition: width 1.0s ease-in-out;
+}
+
+input[type=text]:focus {
+    width: 100%;
+}
+
+input[type=submit] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+input[type=submit]:hover {
+    background-color: #45a049;
+}
+
+/*div {
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+}*/
+
+/*.boxed {
   border: 1px solid grey;
   border-radius: 5px;
   height: 65px;
@@ -23,9 +110,11 @@ body {
   margin-top: 10px;
   padding: 10px;
 
-}
+}*/
 
-h4 {
+
+
+/*h4 {
   color: grey;
 }
 

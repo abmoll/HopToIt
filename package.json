@@ -1,5 +1,5 @@
 {
-  "name": "HopToIt",
+  "name": "hoptoit",
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
@@ -16,10 +16,19 @@
     "express": "^4.16.2",
     "express-session": "^1.15.6",
     "mongodb": "^2.2.33",
-    "mongoose": "^4.13.2",
     "request": "^2.83.0",
+    "mongoose": "^4.13.2",
     "vue": "^2.5.3",
     "vue-googlemaps": "0.0.6",
     "vue-router": "^3.0.1"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abmoll/HopToIt.git"
+  },
+  "bugs": {
+    "url": "https://github.com/abmoll/HopToIt/issues"
+  },
+  "homepage": "https://github.com/abmoll/HopToIt#readme",
+  "description": ""
 }
