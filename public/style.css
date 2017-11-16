@@ -1,21 +1,26 @@
 body {
-  background-color: black;
+  background-color: #000000;
+  background-image: url(images/pexels-photo-1600x2400.jpg);
 }
 
-#all {
+/*#all {
   background-color: #f7f7f7;
   margin: 25px;
-}
+}*/
 
 a {
   color: #16497C;
 }
 
 .headline {
-  background-color: #043002;
+  background-color: #000000;
   margin-top: -20px;
   padding: 10px;
 }
+
+/*.bokeh {
+  background-image: url(images/pexels-photo-1600x2400.jpg);
+}*/
 
 h1 {
   margin-top: 20px;
@@ -34,9 +39,10 @@ h1, h2 {
 }
 
 .form-background-color {
-  background-color: yellow;
+  background-color: grey;
   border-radius: 20px;
   padding: 25px;
+  opacity: 0.7;
 }
 
 input[type=text], select {
