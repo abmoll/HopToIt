@@ -11,19 +11,19 @@
 
 <body>
 
+  <div id="all">
   <p>
-    <h1>HopToIt</h1>
     <div class="login-form">
       <form action="/signUp" method="post">
         <input type="text" name="email" placeholder="E-mail" required="">
         <input type="text" name="username" placeholder="Username" required="">
         <input type="password" name="password" placeholder="Password" required="">
         <input type="password" name="passwordConf" placeholder="Confirm Password" required="">
-        <input type="submit" value="REGISTER">
+        <br><input type="submit" value="REGISTER">
       </form>
     </div>
-
-<p>login</p>
+    <br>
+    <h3><p>Log in</p></h3>
     <div class="login-form">
       <form action="/login" method="post">
         <input type="text" name="logemail" placeholder="E-mail" required="">
@@ -34,98 +34,110 @@
       </form>
     </div>
 
-  <div class="theScreen"></div>
+    <div class="theScreen"></div>
 
-  <link href="style.css" type="text/css" rel="stylesheet">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.3/vue.js"></script>
+    <link href="style.css" type="text/css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.3/vue.js"></script>
 
-  <div id="all">
-    <div id="carousel" class="carousel slide" data-ride="carousel">
-      <div class="carousel-inner">
-        <div class="carousel-item active">
-          <img class="d-block w-100" src="images/header.jpg">
-        </div>
-      </div>
-    </div>
-
-    <div class="headline">
-      <h1>Welcome to Hop To It!</h1>
-      <h2>Your guide to the best breweries and beers in the country!</h2>
-    </div>
-
-
-
-<div class="first-container">
-    <div class="beer-history">
-      <p>Beer is one of the oldest beverages humans have produced, dating back to at least the 5th millennium BC in Iran, and was recorded in the written history of ancient Egypt and Mesopotamia and spread throughout the world.</p>
-
-
-      <p>The invention of bread and beer has been argued to be responsible for humanity's ability to develop technology and build civilization.[5][6][7] The earliest chemically confirmed barley beer to date was discovered at Godin Tepe in the central Zagros Mountains of Iran, where fragments of a jug, from between 5400 and 5000 years ago was found to be coated with beerstone, a by-product of the brewing process.[8]</p>
-
-      <p>Beer may have been known in Neolithic Europe as far back as 5,000 years ago,[9] and was mainly brewed on a domestic scale.[10]</p>
-
-      <p>Beer produced before the Industrial Revolution continued to be made and sold on a domestic scale, although by the 7th century AD beer was also being produced and sold by European monasteries. During the Industrial Revolution, the production of beer moved from artisanal manufacture to industrial manufacture, and domestic manufacture ceased to be significant by the end of the 19th century.[11] The development of hydrometers and thermometers changed brewing by allowing the brewer more control of the process, and greater knowledge of the results.</p>
-
-      <p>Today, the brewing industry is a global business, consisting of several dominant multinational companies and many thousands of smaller producers ranging from brewpubs to regional breweries.[12] More than 133 billion liters (35 billion gallons) are sold per year—producing total global revenues of $294.5 billion (£147.7 billion) in 2006.[13]</p>
-    </div>
-<!-- Left Column -->
-  <div class="container">
-    <div class="row left-column">
-      <div class="col-sm-6">
-        <div class="container form-background-color">
-        <p class="left-column-top-text">To find a brewery</p>
-        <p class="left-column-top-text">Enter a City and State</p>
-        <p class="left-column-top-text">OR a Zip Code</p>
-
-        <form id="form">
-          <input id="locality" type="text" placeholder="enter a City"><br>
-          <input id="region" type="text" placeholder="enter a State"><br><br>
-          <input id="postalCode" type="text" placeholder="Zip Code"><br>
-          <input type="submit" value="Submit"><br><br>
-        </form>
-      </div>
-    </div>
-      <div class="theScreen"></div>
-
-
-      <div id="app">
-        <h2>Brewery Results</h2>
-        <h3 v-if="breweries === undefined">No results found</h3>
-          <div v-for="(item,index) in breweries" v-if="!item.hidden && index<10">
-            <p>{{item.brewery.name}}</p>
-            <p>{{item.streetAddress}}</p>
-            <p>{{item.locality}}, {{item.region}} {{item.postalCode}}</p>
-            <p><a v-bind:href="item.website">{{item.website}}</a></p>
-            <input id="delete" type="button" v-on:click="removeBrewery(item, index, $event)" value="Delete">
-            <input type="button" value="Add to Route"  v-on:click="addBrewery(item, $event)">
-          </div>
-          <br><br>
-          <form action="/getRoute" method="get">
-            <input id="startLoc" type="text" name="startLocation" placeholder="Enter start point"><br>
-            <input type="submit" value="Get Route" >
-          </form>
-        <!-- Right Column -->
-        <div class="col-sm-6">
-          <div class="container">
-            <div id="map">
-            <div id="infowindowcontent">
-              <span id="place-name" class="title"></span><br>
-              <span id="place-id"></span><br>
-              <span id="place-address"></span>
-            </div>
-            </div>
+      <div id="carousel" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img class="d-block w-100" src="images/header.jpg">
           </div>
         </div>
       </div>
-</div>
-</div>
 
-</div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
-<script src="./main.js"></script>
-<script async defer
-src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC46J7DlCyI-jZLtGueSXja2uDkdDEJYRA&libraries=places&callback=mainVm.initMap">
-</script>
+      <div class="headline">
+        <h1>Welcome to Hop To It!</h1>
+        <h2>Your guide to the best breweries and beers in the country!</h2>
+      </div>
+
+
+
+      <div class="first-container">
+        <div class="beer-history">
+          <p>Beer is one of the oldest beverages humans have produced, dating back to at least the 5th millennium BC in Iran, and was recorded in the written history of ancient Egypt and Mesopotamia and spread throughout the world.</p>
+
+
+          <p>The invention of bread and beer has been argued to be responsible for humanity's ability to develop technology and build civilization.[5][6][7] The earliest chemically confirmed barley beer to date was discovered at Godin Tepe in the central
+            Zagros Mountains of Iran, where fragments of a jug, from between 5400 and 5000 years ago was found to be coated with beerstone, a by-product of the brewing process.[8]</p>
+
+          <p>Beer may have been known in Neolithic Europe as far back as 5,000 years ago,[9] and was mainly brewed on a domestic scale.[10]</p>
+
+          <p>Beer produced before the Industrial Revolution continued to be made and sold on a domestic scale, although by the 7th century AD beer was also being produced and sold by European monasteries. During the Industrial Revolution, the production
+            of beer moved from artisanal manufacture to industrial manufacture, and domestic manufacture ceased to be significant by the end of the 19th century.[11] The development of hydrometers and thermometers changed brewing by allowing the brewer
+            more control of the process, and greater knowledge of the results.</p>
+
+          <p>Today, the brewing industry is a global business, consisting of several dominant multinational companies and many thousands of smaller producers ranging from brewpubs to regional breweries.[12] More than 133 billion liters (35 billion gallons)
+            are sold per year—producing total global revenues of $294.5 billion (£147.7 billion) in 2006.[13]</p>
+        </div>
+        <!-- Left Column -->
+        <div id="container" style="width:100%;">
+          <div id="left" style="float:left; width:40%;">
+            <div class="row left-column">
+              <!-- <div class="col-sm-6"> -->
+              <div class="container form-background-color">
+                <p class="left-column-top-text">To find a brewery</p>
+                <p class="left-column-top-text">Enter a City and State</p>
+                <p class="left-column-top-text">OR a Zip Code</p>
+
+                <form id="form">
+                  <input id="locality" type="text" placeholder="enter a City"><br>
+                  <input id="region" type="text" placeholder="enter a State"><br><br>
+                  <input id="postalCode" type="text" placeholder="Zip Code"><br>
+                  <input type="submit" value="Submit"><br><br>
+                </form>
+              </div>
+              <!-- </div> -->
+            </div>
+
+            <div id="app">
+              <h2>Brewery Results</h2>
+              <h3 v-if="breweries === undefined">No results found</h3>
+              <div v-for="(item,index) in breweries" v-if="!item.hidden && index<10">
+                <br>
+                <p>{{item.brewery.name}}</p>
+                <p>{{item.streetAddress}}</p>
+                <p>{{item.locality}}, {{item.region}} {{item.postalCode}}</p>
+                <p><a v-bind:href="item.website">{{item.website}}</a></p>
+                <input id="delete" type="button" v-on:click="removeBrewery(item, index, $event)" value="Delete">
+                <input type="button" value="Add to Route" v-on:click="addBrewery(item, $event)">
+              </div>
+              <br>
+              <form action="/getRoute" method="get">
+                <input id="startLoc" type="text" name="startLocation" placeholder="Enter start point"><br>
+                <input type="submit" value="Get Route">
+              </form>
+            </div>
+          </div>
+          <!-- Right Column -->
+          <div id="right" style="float:right; width:55%;"> <br>
+            <p>This is right panel</p>
+            <p>This is right panel</p>
+            <p>This is right panel</p>
+
+            <div class="row right-column">
+              <!-- <div class="col-sm-6"> -->
+              <div class="container">
+                <div id="map">
+                  <div id="infowindowcontent">
+                    <span id="place-name" class="title"></span><br>
+                    <span id="place-id"></span><br>
+                    <span id="place-address"></span>
+                  </div>
+                </div>
+              </div>
+              <!-- </div> -->
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+      <script src="./main.js"></script>
+      <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC46J7DlCyI-jZLtGueSXja2uDkdDEJYRA&libraries=places&callback=mainVm.initMap">
+      </script>
 </body>
 
 </html>
