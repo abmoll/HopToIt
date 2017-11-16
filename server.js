@@ -26,7 +26,7 @@ app.post('/add', function(request, response) {
 app.post('/remove', function(request, response) {
     console.log("data: " + data)
     console.log("item: " + item)
-    todoModel.findByIdAndRemove(request.body._id, function(err, todo){
+    // todoModel.findByIdAndRemove(request.body._id, function(err, todo){
     response.send("deleted item")
 });
 
@@ -53,7 +53,7 @@ app.get('/apiZip', function(req, res) {
 
 app.listen(8080, function() {
   console.log('The app is running on 8080');
-})
+});
 
 
 // ************* Database stuff for reference ********************

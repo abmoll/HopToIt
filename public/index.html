@@ -24,14 +24,28 @@
       <h2>Your guide to the best breweries and beers in the country!</h2>
     </div>
 
+    
+
+<div class="first-container">
+    <div class="beer-history">
+      <p>Beer is one of the oldest beverages humans have produced, dating back to at least the 5th millennium BC in Iran, and was recorded in the written history of ancient Egypt and Mesopotamia and spread throughout the world.</p>
+
+      <p>The invention of bread and beer has been argued to be responsible for humanity's ability to develop technology and build civilization.[5][6][7] The earliest chemically confirmed barley beer to date was discovered at Godin Tepe in the central Zagros Mountains of Iran, where fragments of a jug, from between 5400 and 5000 years ago was found to be coated with beerstone, a by-product of the brewing process.[8]</p>
+
+      <p>Beer may have been known in Neolithic Europe as far back as 5,000 years ago,[9] and was mainly brewed on a domestic scale.[10]</p>
+
+      <p>Beer produced before the Industrial Revolution continued to be made and sold on a domestic scale, although by the 7th century AD beer was also being produced and sold by European monasteries. During the Industrial Revolution, the production of beer moved from artisanal manufacture to industrial manufacture, and domestic manufacture ceased to be significant by the end of the 19th century.[11] The development of hydrometers and thermometers changed brewing by allowing the brewer more control of the process, and greater knowledge of the results.</p>
+
+      <p>Today, the brewing industry is a global business, consisting of several dominant multinational companies and many thousands of smaller producers ranging from brewpubs to regional breweries.[12] More than 133 billion liters (35 billion gallons) are sold per year—producing total global revenues of $294.5 billion (£147.7 billion) in 2006.[13]</p>
+    </div>
 <!-- Left Column -->
   <div class="container">
-    <div class="row">
+    <div class="row left-column">
       <div class="col-sm-6">
         <div class="container form-background-color">
-        <p>To find a brewery</p>
-        <p>Enter a City and State</p>
-        <p>OR a Zip Code</p>
+        <p class="left-column-top-text">To find a brewery</p>
+        <p class="left-column-top-text">Enter a City and State</p>
+        <p class="left-column-top-text">OR a Zip Code</p>
 
         <form id="form">
           <input id="locality" type="text" placeholder="enter a City"><br>
@@ -43,12 +57,12 @@
       <div class="theScreen"></div>
 
       <div id="app">
-        <h2>Brewery Results</h2>
+        <h2 class="brewery-results">Brewery Results</h2>
         <h3 v-if='breweries === undefined'>No results found</h3>
         <form v-for="(item,index) in breweries" v-on:submit='removeBrewery(item, $event)' v-if='!item.hidden && index<10'>
-          <p>{{item.brewery.name}}</p>
-          <p>{{item.streetAddress}}</p>
-          <p><a v-bind:href='item.website'>{{item.website}}</a></p>
+          <p class="brewery-results">{{item.brewery.name}}</p>
+          <p class="brewery-results">{{item.streetAddress}}</p>
+          <p class="brewery-results"><a v-bind:href='item.website'>{{item.website}}</a></p>
           <input id="add" type="submit" value="Add">
           <input id="delete" type="submit" value="Delete">
 
@@ -61,32 +75,13 @@
   <!-- Right Column -->
           <div class="col-sm-6">
             <div class="container">
-              <p>Placeholder text only. The commercial brewing of beer has taken place since at least 2500 BC. Brewing was initially a cottage industry, with production taking place at home; by the ninth century monasteries and farms would produce beer on a larger scale.</p>
+              <p>Map of brewery locations</p>
               <img src="topo-co.jpg" width=600px>
             </div>
           </div>
         </div>
       </div>
-
-<<<<<<< HEAD
-=======
-  <div id="app">
-    <h2>Brewery Results</h2>
-    <h3 v-if='breweries === undefined'>No results found</h3>
-    <form v-for="(item,index) in breweries" v-if='!item.hidden && index<10'>
-      <p>{{item.brewery.name}}</p>
-      <p>{{item.streetAddress}}</p>
-      <!-- <p>{{item.locality}}, {{item.region}} {{item.postalCode}}</p> -->
-      <p><a v-bind:href='item.website'>{{item.website}}</a></p>
-      <input id="add" type="submit" value="Add" v-on:click='addBrewery(item, $event)'>
-      <input id="delete" type="submit" value="Delete" v-on:click='removeBrewery(item, index, $event)'>
-      <br><br>
-    </form>
-  </div>
-  <input id="startLoc" type="text" placeholder="Enter start point"><br>
-  </p>
->>>>>>> 8c4653293d429ae5300796035868df4c91dae1b8
-
+</div>
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
   <script src=./main.js></script>
