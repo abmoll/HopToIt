@@ -11,7 +11,7 @@
 
 <body>
 
-    <h1>HopToIt</h1>
+<div class="container">
     <div class="login-form">
       <form action="/signUp" method="post">
         <input type="text" name="email" placeholder="E-mail" required="">
@@ -21,6 +21,7 @@
         <input type="submit" value="REGISTER">
       </form>
     </div>
+</div>
 
 <p>login</p>
     <div class="login-form">
@@ -90,9 +91,9 @@
         <h2>Brewery Results</h2>
         <h3 v-if="breweries === undefined">No results found</h3>
           <div v-for="(item,index) in breweries" v-if="!item.hidden && index<10">
-            <p>{{item.brewery.name}}</p>
-            <p>{{item.streetAddress}}</p>
-            <p>{{item.locality}}, {{item.region}} {{item.postalCode}}</p>
+            <p class="brewery-results">{{item.brewery.name}}</p>
+            <p class="brewery-results">{{item.streetAddress}}</p>
+            <p class="brewery-results">{{item.locality}}, {{item.region}} {{item.postalCode}}</p>
             <p><a v-bind:href="item.website">{{item.website}}</a></p>
             <input id="delete" type="button" v-on:click="removeBrewery(item, index, $event)" value="Delete">
             <input type="button" value="Add to Route"  v-on:click="addBrewery(item, $event)">
@@ -106,6 +107,7 @@
         <div class="col-sm-6">
           <div class="container">
             <div id="map">
+            <p>MAP GOES HERE</p>
             <div id="infowindowcontent">
               <span id="place-name" class="title"></span><br>
               <span id="place-id"></span><br>
