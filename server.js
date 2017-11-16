@@ -26,7 +26,7 @@ app.post('/add', function(request, response) {
 app.post('/remove', function(request, response) {
     console.log("data: " + data)
     console.log("item: " + item)
-    todoModel.findByIdAndRemove(request.body._id, function(err, todo){
+    // todoModel.findByIdAndRemove(request.body._id, function(err, todo){
     response.send("deleted item")
 });
 
@@ -39,21 +39,14 @@ app.get('/api', function(req, res) {
     res.send(body)
   })
 })
-
-app.get('/apiZip', function(req, res) {
-  console.log(req.query);
-  var breweryUrl = `http://api.brewerydb.com/v2/locations?postalCode=${req.query.postalCode}&key=58bc55fe9138082bf63a6f6ff8c1c861`;
-  request(breweryUrl, function(err, response, body) {
-    //console.log(response)
-    console.log(body.data)
-    //res.send(response)
-    res.send(body)
-  })
+app.get('/testing', function(req,res){
+    res.sendFile("./public/testing.html", {root: './'});
 })
+
 
 app.listen(8080, function() {
   console.log('The app is running on 8080');
-})
+});
 
 
 // ************* Database stuff for reference ********************
