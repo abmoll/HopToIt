@@ -4,6 +4,7 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var session = require('express-session');
 var MongoStore = require('connect-mongo')(session);
+var path = require('path');
 
 //connect to MongoDB
 mongoose.connect('mongodb://localhost/hopToIt', {useMongoClient:true});
@@ -32,6 +33,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 // serve static files from template
 app.use(express.static(__dirname + '/public'));
+
 
 // include routes
 var routes = require('./routes/router');

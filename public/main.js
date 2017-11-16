@@ -34,18 +34,21 @@ var mainVm = new Vue({
     },
 
     addBrewery: function(item, event) {
+      var breweryData = item
+      console.log(item)
       // event.preventDefault();
       //mainVm.breweries.push(item)
-      $.post('/add', item, (data)=>{
-
+      $.post('/add', breweryData, (data,res)=>{
+        console.log(res)
       })
     },
 
     getRoute: function() {
-
-      $.post('/getRoute', item, (data,res)=>{
-        console.log(res)
-      })
+      // var route = data
+      // event.preventDefault()
+      // $.post('/getRoute', route, (data,res)=>{
+      //   console.log(res)
+      // })
     },
 
     initMap: function() {

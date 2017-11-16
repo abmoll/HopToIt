@@ -32,12 +32,12 @@
             <p>{{item.locality}}, {{item.region}} {{item.postalCode}}</p>
             <p><a v-bind:href="item.website">{{item.website}}</a></p>
             <input id="delete" type="button" v-on:click="removeBrewery(item, index, $event)" value="Delete">
-            <input type="button" value="Add to Route" v-on:submit="addBrewery(item, $event)">
+            <input type="button" value="Add to Route" v-on:click="addBrewery(item, $event)">
           </div>
           <br><br>
-          <form>
-            <input id="startLoc" type="text" placeholder="Enter start point"><br>
-            <input type="submit" value="Get Route" v-on:submit="getRoute()">
+          <form action="/getRoute" method="post">
+            <input id="startLoc" type="text" name="startLocation" placeholder="Enter start point"><br>
+            <input type="submit" value="Get Route" >
           </form>
         </div>
       <div id="map">

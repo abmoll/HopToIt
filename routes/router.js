@@ -3,12 +3,13 @@ var router = express.Router();
 var User = require('../models/user');
 var app = express();
 const request = require('request');
+var path = require('path');
 
 // GET route for reading data
-router.get('/', function (req, res, next) {
-  console.log("here")
-  return res.sendFile(path.join(__dirname + '/public/index.html'));
-});
+// router.get('/', function (req, res, next) {
+//   console.log("here")
+//   return res.sendFile(path.join(__dirname + '/index.html'));
+// });
 
 
 // route for remove function
@@ -18,13 +19,17 @@ router.post('/remove', function(req,res){
 })
 
 router.post('/add', function(req,res){
-  console.log(req.body)
+  var address = req.body
+  // store address of brewery to send to database for saving
+  var newAddress = [`${address.streetAddress}, ${address.locality} `]
+
+  console.log(newAddress)
   res.send('add')
 })
 
 router.post('/getRoute', function(req,res){
   console.log(req.body)
-  res.send('route received')
+  res.sendFile("/public/googleMaps.html", {root:'./'})
 })
 
 
