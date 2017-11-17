@@ -16,6 +16,15 @@ db.once('open', function () {
   // we're connected!
 });
 
+const logger = (req, res, next) => {
+  console.log('BODY', req.body);
+  console.log('SESSION', req.session);
+  next();
+}
+
+
+app.use(logger);
+
 //use sessions for tracking logins
 app.use(session({
   secret: 'work hard',
