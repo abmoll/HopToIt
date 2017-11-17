@@ -28,8 +28,19 @@ a:hover {
   padding: 10px;
 }
 
+.container {
+  height: 600px;
+}
+
 .beer-history {
+<<<<<<< HEAD
   margin: 30px 90px 30px 120px;
+=======
+}
+
+#map {
+  height:600px;
+>>>>>>> 7b36b7e53905e3d92bdbeb25fe0f57a8ebfa3920
 }
 
 .left-column {
