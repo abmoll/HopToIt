@@ -12,7 +12,7 @@
 <body>
 
   <div id="all">
-    <p>
+    <!-- <p>
       <div class="login-form">
         <form action="/signUp" method="post">
           <input type="text" name="email" placeholder="E-mail" required="">
@@ -23,102 +23,153 @@
         </form>
       </div>
       <br>
-      <h3><p>Log in</p></h3>
-      <div class="login-form">
-        <form action="/login" method="post">
-          <input type="text" name="logemail" placeholder="E-mail" required="">
-          <input type="password" name="logpassword" placeholder="Password" required="">
-          <div class="tp">
-            <input type="submit" value="LOGIN NOW">
+      <h3><p>Log in</p></h3> -->
+    <div class="row">
+      <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Login</button>
+
+      <div id="id01" class="modal">
+
+        <form class="modal-content animate" action="/login" method="post">
+          <div class="imgcontainer">
+            <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+            <img src="img_avatar2.png" alt="Avatar" class="avatar">
+          </div>
+
+          <div class="container">
+            <label><b>Username</b></label>
+            <input type="text" placeholder="Enter Email" name="logemail" required>
+
+            <label><b>Password</b></label>
+            <input type="password" placeholder="Enter Password" name="logpassword" required>
+
+            <button type="submit">Login</button>
+            <input type="checkbox" checked="checked"> Remember me
+          </div>
+
+          <div class="container" style="background-color:#f1f1f1">
+            <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+            <span class="psw">Forgot <a href="#">password?</a></span>
           </div>
         </form>
       </div>
+      <!-- **** End Modal Login **** -->
 
-      <div class="theScreen"></div>
+      <!-- **** Modal Registration Form **** -->
+      <div>
+        <button onclick="document.getElementById('id02').style.display='block'" style="width:auto;">Sign Up</button>
+        <div id="id02" class="modal">
+          <span onclick="document.getElementById('id02').style.display='none'" class="close" title="Close Modal">×</span>
+          <form class="modal-content animate" action="/signUp" method="post">
+            <div class="container">
+              <input type="text" name="email" placeholder="E-mail" required="">
+              <input type="text" name="username" placeholder="Username" required="">
+              <input type="password" name="password" placeholder="Password" required="">
+              <input type="password" name="passwordConf" placeholder="Confirm Password" required="">
+              <input type="checkbox" checked="checked"> Remember me
+              <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
 
-      <link href="style.css" type="text/css" rel="stylesheet">
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.3/vue.js"></script>
+              <div class="clearfix">
+                <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+                <button type="submit" class="signupbtn">Sign Up</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!-- End Row -->
+  </div>
+  <!-- End container -->
+  <!-- **** End Modal Registration Form **** -->
 
-      <div id="carousel" class="carousel slide" data-ride="carousel">
-        <div class="carousel-inner">
-          <div class="carousel-item active">
-            <img class="d-block w-100" src="images/header.jpg">
+  <div class="theScreen"></div>
+
+  <link href="style.css" type="text/css" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.3/vue.js"></script>
+
+  <div id="carousel" class="carousel slide" data-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img class="d-block w-100" src="images/header.jpg">
+      </div>
+    </div>
+  </div>
+
+  <div class="headline">
+    <h1>Welcome to Hop To It!</h1>
+    <h2>Your guide to the best breweries and beers in the country!</h2>
+  </div>
+
+  <div class="first-container">
+    <div class="beer-history">
+      <p>Beer is one of the oldest beverages humans have produced, dating back to at least the 5th millennium BC in Iran, and was recorded in the written history of ancient Egypt and Mesopotamia and spread throughout the world.</p>
+      <p>The invention of bread and beer has been argued to be responsible for humanity's ability to develop technology and build civilization. The earliest chemically confirmed barley beer to date was discovered at Godin Tepe in the central Zagros Mountains
+        of Iran, where fragments of a jug, from between 5400 and 5000 years ago was found to be coated with beerstone, a by-product of the brewing process.</p>
+      <p>Beer may have been known in Neolithic Europe as far back as 5,000 years ago,[9] and was mainly brewed on a domestic scale.</p>
+      <p>Beer produced before the Industrial Revolution continued to be made and sold on a domestic scale, although by the 7th century AD beer was also being produced and sold by European monasteries. During the Industrial Revolution, the production of beer
+        moved from artisanal manufacture to industrial manufacture, and domestic manufacture ceased to be significant by the end of the 19th century. The development of hydrometers and thermometers changed brewing by allowing the brewer more control of
+        the process, and greater knowledge of the results.</p>
+      <p>Today, the brewing industry is a global business, consisting of several dominant multinational companies and many thousands of smaller producers ranging from brewpubs to regional breweries. More than 133 billion liters (35 billion gallons) are sold
+        per year—producing total global revenues of $294.5 billion (£147.7 billion) in 2006.</p>
+    </div>
+    <!-- Left Column -->
+    <div id="container" style="width:100%;">
+      <div id="left" style="float:left; width:30%;">
+        <div class="row left-column">
+          <!-- <div class="col-sm-6"> -->
+          <div class="container form-background-color">
+            <p class="left-column-top-text">
+              <font size="6">To find a brewery</font>
+            </p>
+            <p class="left-column-top-text">Enter a City and State or a Zip Code</p>
+
+            <form id="form">
+              <input id="locality" type="text" placeholder="enter a City"><br>
+              <input id="region" type="text" placeholder="enter a State"><br><br>
+              <input id="postalCode" type="text" placeholder="Zip Code"><br>
+              <input type="submit" value="Submit"><br><br>
+            </form>
+          </div>
+          <!-- </div> -->
+        </div>
+
+        <div id="app">
+          <h2>Brewery Results</h2>
+          <h3 v-if="breweries === undefined">No results found</h3>
+          <div v-for="(item,index) in breweries" v-if="!item.hidden && index<10">
+            <br>
+            <p>{{item.brewery.name}}</p>
+            <p>{{item.streetAddress}}</p>
+            <p>{{item.locality}}, {{item.region}} {{item.postalCode}}</p>
+            <p><a v-bind:href="item.website">{{item.website}}</a></p>
+            <input id="delete" type="button" v-on:click="removeBrewery(item, index, $event)" value="Delete">
+            <input type="button" value="Add to Route" v-on:click="addBrewery(item, $event)">
+          </div>
+
+          <form action="/getRoute" method="get">
+            <input type="submit" value="Get Route">
+          </form>
+        </div>
+      </div>
+      <!-- Right Column -->
+      <div id="right" style="float:right; width:65%;"> <br>
+
+        <div class="row-right-column">
+          <!-- <div class="col-sm-6"> -->
+          <div class="container">
+            <div id="map">
+              <div id="infowindowcontent">
+                <span id="place-name" class="title"></span><br>
+                <span id="place-id"></span><br>
+                <span id="place-address"></span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
+    </div>
 
-      <div class="headline">
-        <h1>Welcome to Hop To It!</h1>
-        <h2>Your guide to the best breweries and beers in the country!</h2>
-      </div>
-
-      <div class="first-container">
-        <div class="beer-history">
-          <p>Beer is one of the oldest beverages humans have produced, dating back to at least the 5th millennium BC in Iran, and was recorded in the written history of ancient Egypt and Mesopotamia and spread throughout the world.</p>
-          <p>The invention of bread and beer has been argued to be responsible for humanity's ability to develop technology and build civilization. The earliest chemically confirmed barley beer to date was discovered at Godin Tepe in the central Zagros Mountains
-            of Iran, where fragments of a jug, from between 5400 and 5000 years ago was found to be coated with beerstone, a by-product of the brewing process.</p>
-          <p>Beer may have been known in Neolithic Europe as far back as 5,000 years ago,[9] and was mainly brewed on a domestic scale.</p>
-          <p>Beer produced before the Industrial Revolution continued to be made and sold on a domestic scale, although by the 7th century AD beer was also being produced and sold by European monasteries. During the Industrial Revolution, the production
-            of beer moved from artisanal manufacture to industrial manufacture, and domestic manufacture ceased to be significant by the end of the 19th century. The development of hydrometers and thermometers changed brewing by allowing the brewer more
-            control of the process, and greater knowledge of the results.</p>
-          <p>Today, the brewing industry is a global business, consisting of several dominant multinational companies and many thousands of smaller producers ranging from brewpubs to regional breweries. More than 133 billion liters (35 billion gallons) are
-            sold per year—producing total global revenues of $294.5 billion (£147.7 billion) in 2006.</p>
-        </div>
-        <!-- Left Column -->
-        <div id="container" style="width:100%;">
-          <div id="left" style="float:left; width:30%;">
-            <div class="row left-column">
-              <!-- <div class="col-sm-6"> -->
-              <div class="container form-background-color">
-                <p class="left-column-top-text"><font size="6">To find a brewery</font></p>
-                <p class="left-column-top-text">Enter a City and State or a Zip Code</p>
-
-                <form id="form">
-                  <input id="locality" type="text" placeholder="enter a City"><br>
-                  <input id="region" type="text" placeholder="enter a State"><br><br>
-                  <input id="postalCode" type="text" placeholder="Zip Code"><br>
-                  <input type="submit" value="Submit"><br><br>
-                </form>
-              </div>
-              <!-- </div> -->
-            </div>
-
-            <div id="app">
-              <h2>Brewery Results</h2>
-              <h3 v-if="breweries === undefined">No results found</h3>
-              <div v-for="(item,index) in breweries" v-if="!item.hidden && index<10">
-                <br>
-                <p>{{item.brewery.name}}</p>
-                <p>{{item.streetAddress}}</p>
-                <p>{{item.locality}}, {{item.region}} {{item.postalCode}}</p>
-                <p><a v-bind:href="item.website">{{item.website}}</a></p>
-                <input id="delete" type="button" v-on:click="removeBrewery(item, index, $event)" value="Delete">
-                <input type="button" value="Add to Route" v-on:click="addBrewery(item, $event)">
-              </div>
-
-              <form action="/getRoute" method="get">
-                <input type="submit" value="Get Route">
-              </form>
-            </div>
-          </div>
-          <!-- Right Column -->
-          <div id="right" style="float:right; width:65%;"> <br>
-
-            <div class="row-right-column">
-              <!-- <div class="col-sm-6"> -->
-              <div class="container">
-                <div id="map">
-                  <div id="infowindowcontent">
-                    <span id="place-name" class="title"></span><br>
-                    <span id="place-id"></span><br>
-                    <span id="place-address"></span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+  </div>
   </div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
   <script src="./main.js"></script>
