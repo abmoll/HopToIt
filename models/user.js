@@ -18,7 +18,14 @@ var UserSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  addresses: {
+    type: Array,
+    required: false,
+  }
 });
+
+
+
 
 //authenticate input against database
 UserSchema.statics.authenticate = function (email, password, callback) {
@@ -59,6 +66,19 @@ UserSchema.pre('save', function (next) {
   })
 });
 
+UserSchema.statics.updateDB = function(address, user, cb){
+  User.findByIdAndUpdate(user,
+    { $push: { addresses: address }},
+    { new: true },
+    function (err, user) {
+      if (err) { return cb(err); };
+      cb(null, user);
+});
+}
+
+// UserSchema.statics.getData = function(user,cb){
+//   User.find(user)
+// }
 
 // export user for use in other files
 var User = mongoose.model('User', UserSchema);

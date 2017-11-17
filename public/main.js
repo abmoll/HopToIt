@@ -12,6 +12,20 @@ window.onclick = function(event) {
 
 
 //any code inside doc ready wont run until html is loaded on page
+// Modal Login
+
+// Get the modal
+var modal = document.getElementById('id01');
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+ 
+
+
 
 var mainVm = new Vue({
   el: '#app',
@@ -57,11 +71,11 @@ var mainVm = new Vue({
     },
 
     getRoute: function() {
-      // var route = data
-      // event.preventDefault()
-      // $.post('/getRoute', route, (data,res)=>{
-      //   console.log(res)
-      // })
+      event.preventDefault()
+      $.get('/getRoute', (data,res)=>{
+        console.log(res)
+        mainVm.breweryString = res
+      })
     },
 
     initMap: function() {
@@ -96,6 +110,13 @@ var mainVm = new Vue({
       var infowindowContent = document.getElementById('infowindowcontent')
       var service = new google.maps.places.PlacesService(vm.map);
       var geocoder = new google.maps.Geocoder;
+
+      for (var breweries in mainVm.breweries) {
+        console.log(mainVm.breweries)
+      }
+
+
+
       // Build the marker pins
       for (var i=0; i < address.length; i++) {
         // run geocoder to turn string into usable coordinates
@@ -123,16 +144,18 @@ var mainVm = new Vue({
             if (status === google.maps.places.PlacesServiceStatus.OK) {
                 console.log(place);
             }
-          });
 
           // Add an on click event to the marker that will open a display box with brewery information
           marker.addListener('click', ()=>{
             console.log(results);
             // set the contents of the markers text box
-            infowindow.setContent(`'<div><strong>Brewery '   '</strong><br>'
-            'Address: '  ${mainVm.breweries[i]} '<br>`);
+            console.log(mainVm.breweries)
+
+            infowindow.setContent(`<div><strong>Address: </strong> ${place.formatted_address} <br>`);
             // open the display box
             infowindow.open(map, marker);
+          });
+
           });
         });
       }
@@ -161,6 +184,7 @@ $("#form").submit(function(event) {
 
       }
       mainVm.breweries = body.data;
+      mainVm.initMap()
     }
   })
 
