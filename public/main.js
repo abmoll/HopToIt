@@ -44,11 +44,11 @@ var mainVm = new Vue({
     },
 
     getRoute: function() {
-      // var route = data
-      // event.preventDefault()
-      // $.post('/getRoute', route, (data,res)=>{
-      //   console.log(res)
-      // })
+      event.preventDefault()
+      $.get('/getRoute', (data,res)=>{
+        console.log(res)
+        mainVm.breweryString = res
+      })
     },
 
     initMap: function() {

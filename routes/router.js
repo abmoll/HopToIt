@@ -20,14 +20,18 @@ router.post('/remove', function(req,res){
 
 router.post('/add', function(req,res){
   var address = req.body
+  var user = req.session.userId
+  console.log(user)
   // store address of brewery to send to database for saving
-  var newAddress = [`${address.streetAddress}, ${address.locality} `]
-
+  var newAddress = `${address.streetAddress}, ${address.locality} `
+  User.updateDB(newAddress, user, function(err, upUser){
+    console.log("database updated")
+    res.send(upUser)
+  });
   console.log(newAddress)
-  res.send('add')
 })
 
-
+// v if is logged in
 
 //POST route for updating data
 router.post('/signUp', function (req, res, next) {
@@ -75,12 +79,29 @@ router.post('/login', function(req,res,next){
        err.status = 401;
        return next(err);
      } else {
-       req.session.userId = user._id;
+       req.session.userId = user._id
        return res.redirect('/');
      }
    });
  }
 });
+
+
+router.get('/getData', function(req,res){
+  User.findById(req.session.userId)
+    .exec(function (error,user){
+      console.log("working")
+      if (error) {
+        return next(err);
+      }
+      else{
+        console.log(user.addresses, "this on server");
+        res.send(user.addresses);
+
+      }
+    })
+  })
+// send session.userId
 
 // GET route after registering
 router.get('/getRoute', function (req, res, next) {
@@ -101,10 +122,19 @@ router.get('/getRoute', function (req, res, next) {
     });
 });
 
-router.get('/getRoute', function(req,res){
+// before create
+
+router.get('/getRoute', function(req,res,next){
   console.log(req.body)
+
   res.sendFile("/public/drivingRoute.html", {root:'./'})
 })
+
+// router.get('/getRoute', function(req,res,next){
+//
+//       }
+//     })
+// })
 
 router.get('/next', function (req, res, next) {
   User.findById(req.session.userId)
