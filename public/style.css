@@ -33,14 +33,11 @@ a:hover {
 }
 
 .beer-history {
-<<<<<<< HEAD
   margin: 30px 90px 30px 120px;
-=======
 }
 
 #map {
   height:600px;
->>>>>>> 7b36b7e53905e3d92bdbeb25fe0f57a8ebfa3920
 }
 
 .left-column {
@@ -108,13 +105,8 @@ input[type=submit]:hover {
     background-color: #45a049;
 }
  
-/* ====== Modal login form ======== */s
+/* ====== Modal login form ======== */
 
-<<<<<<< HEAD
-=======
-/* ====== Modal login form ======== */s
-
->>>>>>> d3943bc7fce8ab34001f5355abd7ab5d4a9bb3ea
 /* Full-width input fields */
 input[type=text], input[type=password] {
     width: 100%;
@@ -124,10 +116,7 @@ input[type=text], input[type=password] {
     border: 1px solid #ccc;
     box-sizing: border-box;
 }
-<<<<<<< HEAD
 
-=======
->>>>>>> d3943bc7fce8ab34001f5355abd7ab5d4a9bb3ea
 /* Set a style for all buttons */
 button {
     background-color: #dbdbdb;
@@ -138,8 +127,7 @@ button {
     cursor: pointer;
     width: 100%;
 }
-<<<<<<< HEAD
-=======
+
 
 button:hover {
     opacity: 0.8;
@@ -353,7 +341,6 @@ button {
   left: 150px;
   margin-top: 10px;
   padding: 10px;
->>>>>>> d3943bc7fce8ab34001f5355abd7ab5d4a9bb3ea
 
 button:hover {
     opacity: 0.8;
