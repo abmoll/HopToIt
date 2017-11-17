@@ -3,10 +3,16 @@
   margin-top: -10px;
   padding-top: 5px;
 }
-
+p {
+  margin-left: 10px;
+}
 
 a {
   color: blue;
+}
+#right {
+  margin: 0px;
+  padding: 0px;
 }
 
 #all {

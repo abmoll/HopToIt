@@ -131,12 +131,6 @@ router.get('/getRoute', function(req,res,next){
   res.sendFile("/public/drivingRoute.html", {root:'./'})
 })
 
-// router.get('/getRoute', function(req,res,next){
-//
-//       }
-//     })
-// })
-
 router.get('/next', function (req, res, next) {
   User.findById(req.session.userId)
     .exec(function (error, user) {
@@ -169,9 +163,6 @@ router.get('/logout', function (req, res, next) {
     });
   }
 });
-
-
-
 
 // routes for api calls
 router.get('/api', function(req, res) {
