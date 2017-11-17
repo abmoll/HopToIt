@@ -92,7 +92,7 @@ router.get('/getData', function(req,res){
     .exec(function (error,user){
       console.log("working")
       if (error) {
-        return next(err);
+         return next(err)
       }
       else{
         console.log(user.addresses, "this on server");
@@ -111,9 +111,10 @@ router.get('/getRoute', function (req, res, next) {
         return next(error);
       } else {
         if (user === null) {
-          var err = new Error('Not authorized! Go back!');
-          err.status = 400;
-          return next(err);
+          // var err = new Error(`Not authorized! Go back! <a type="button" href="/"> Home</a>`);
+          // err.status = 400;
+          // return next(err);
+          res.sendFile("/public/notLoggedIn.html", {root:'./'})
         } else {
           next()
           // return res.send('<h1>Name: </h1>' + user.username + '<h2>Mail: </h2>' + user.email + '<br><a type="button" href="/logout">Logout</a>')
@@ -143,7 +144,7 @@ router.get('/next', function (req, res, next) {
         return next(error);
       } else {
         if (user === null) {
-          var err = new Error('Not authorized! Go back!');
+          var err = new Error("Not authorized! Go back and login!");
           err.status = 400;
           return next(err);
         } else {

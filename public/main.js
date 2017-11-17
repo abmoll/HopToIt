@@ -83,6 +83,13 @@ var mainVm = new Vue({
       var infowindowContent = document.getElementById('infowindowcontent')
       var service = new google.maps.places.PlacesService(vm.map);
       var geocoder = new google.maps.Geocoder;
+
+      for (var breweries in mainVm.breweries) {
+        console.log(mainVm.breweries)
+      }
+
+
+
       // Build the marker pins
       for (var i=0; i < address.length; i++) {
         // run geocoder to turn string into usable coordinates
@@ -110,16 +117,18 @@ var mainVm = new Vue({
             if (status === google.maps.places.PlacesServiceStatus.OK) {
                 console.log(place);
             }
-          });
 
           // Add an on click event to the marker that will open a display box with brewery information
           marker.addListener('click', ()=>{
             console.log(results);
             // set the contents of the markers text box
-            infowindow.setContent(`'<div><strong>Brewery '   '</strong><br>'
-            'Address: '  ${mainVm.breweries[i]} '<br>`);
+            console.log(mainVm.breweries)
+
+            infowindow.setContent(`<div><strong>Address: </strong> ${place.formatted_address} <br>`);
             // open the display box
             infowindow.open(map, marker);
+          });
+
           });
         });
       }
@@ -148,6 +157,7 @@ $("#form").submit(function(event) {
 
       }
       mainVm.breweries = body.data;
+      mainVm.initMap()
     }
   })
 
