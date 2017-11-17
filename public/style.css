@@ -22,8 +22,15 @@ a:hover {
   padding: 10px;
 }
 
-.beer-history {
+.container {
+  height: 600px;
+}
 
+.beer-history {
+}
+
+#map {
+  height:600px;
 }
 
 .left-column {
