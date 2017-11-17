@@ -251,7 +251,15 @@
 <body>
   <div id="floating-panel">
   <a type="button" href="/logout">Logout </a>|
-  <a type="button" href="/"> Home</a>
+  <a type="button" href="/"> Home</a><br>
+  <b>Mode of Travel: </b>
+   <select id="mode">
+     <option value="DRIVING">Driving</option>
+     <option value="WALKING">Walking</option>
+     <option value="BICYCLING">Bicycling</option>
+     <option value="TRANSIT">Transit</option>
+   </select>
+
   </div>
   <div id="right-panel"></div>
   <div id="map"></div>
@@ -278,7 +286,9 @@
         control.style.display = 'block';
         map.controls[google.maps.ControlPosition.TOP_CENTER].push(control);
 
-
+        document.getElementById('mode').addEventListener('change', function() {
+          calculateAndDisplayRoute(directionsService, directionsDisplay, address);
+        });
         calculateAndDisplayRoute(directionsService, directionsDisplay, address);
         //
         // document.getElementById('start').addEventListener('change', onChangeHandler);
@@ -287,6 +297,7 @@
     }
 
     function calculateAndDisplayRoute(directionsService, directionsDisplay, address) {
+      var selectedMode = document.getElementById('mode').value;
       console.log(address, "address")
       var start = address[0]
       var end = address[address.length - 1]
@@ -307,7 +318,7 @@
           destination: end,
           waypoints: waypnt,
           optimizeWaypoints: true,
-          travelMode: 'DRIVING'
+          travelMode: google.maps.TravelMode[selectedMode]
         }, function(response, status) {
           if (status === 'OK') {
             directionsDisplay.setDirections(response);
