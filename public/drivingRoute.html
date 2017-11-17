@@ -51,16 +51,21 @@
   <div id="app">
   </div>
   <script>
-    $(document).ready(function() {
-      $.get('/getData', initData)
-
-      function initData(data) {
-        newData = data
-      }
-
-    });
+    // $(document).ready(function() {
+    //   $.get('/getData', initData)
+    //
+    //   function initData(data) {
+    //     newData = data
+    //   }
+    //
+    // });
 
     function initMap() {
+
+      var address;
+      $.get('/getData', function(data){
+        address = data
+      })
       var map = new google.maps.Map(document.getElementById('map'), {
         zoom: 8,
         center: {
@@ -82,15 +87,13 @@
       // }
       //
       // function geocodeAddress(geocoder, resultsMap) {
-      var address
+
       // store location names in an array of strings
       setTimeout(function() {
-          address = mainVm.breweryString
+
 
           // loop over array and make a marker for each brewery
           for (var i = 0; i < address.length; i++) {
-
-
             geocoder.geocode({
               'address': address[i]
             }, function(results, status) {
@@ -113,12 +116,10 @@
                     alert('Geocode was not successful for the following reason: ' + status);
                   }
                 }
-
-
               })
           });
       }
-    }, 8000)
+    }, 1000)
     }
   </script>
 
