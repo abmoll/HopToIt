@@ -24,9 +24,35 @@
           <img src="img_avatar2.png" alt="Avatar" class="avatar">
         </div>
 
+<<<<<<< HEAD
         <div class="container">
           <label><b>Username</b></label>
           <input type="text" placeholder="Enter Username" name="uname" required>
+=======
+  <div id="all">
+    <!-- <p>
+      <div class="login-form">
+        <form action="/signUp" method="post">
+          <input type="text" name="email" placeholder="E-mail" required="">
+          <input type="text" name="username" placeholder="Username" required="">
+          <input type="password" name="password" placeholder="Password" required="">
+          <input type="password" name="passwordConf" placeholder="Confirm Password" required="">
+          <br><input type="submit" value="REGISTER">
+        </form>
+      </div>
+      <br>
+      <h3><p>Log in</p></h3> -->
+    <div class="row">
+      <button id="loginbtn" onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Login</button>
+
+      <div id="id01" class="modal">
+
+        <form class="modal-content animate" action="/login" method="post">
+          <div class="imgcontainer">
+            <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+            <img src="img_avatar2.png" alt="Avatar" class="avatar">
+          </div>
+>>>>>>> 2639adf3a6d497e0ab4f2df61dd2a47ba8735d09
 
           <label><b>Password</b></label>
           <input type="password" placeholder="Enter Password" name="psw" required>
@@ -73,6 +99,7 @@
 </div>  <!-- End container -->
 <!-- **** End Modal Registration Form **** -->
 
+<<<<<<< HEAD
 <!-- Header Image  -->
  <div id="carousel" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner">
@@ -81,6 +108,15 @@
 
           </div>
         </div>
+=======
+  <link href="style.css" type="text/css" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.3/vue.js"></script>
+<div id ="all">
+  <div id="carousel" class="carousel slide" data-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img class="d-block w-100" src="images/header.jpg">
+>>>>>>> 2639adf3a6d497e0ab4f2df61dd2a47ba8735d09
       </div>
     <div class="headline">
       <h1>Welcome to Hop To It!</h1>
@@ -94,6 +130,7 @@
         <p>Enter either city and state or a zip code to see local breweries. Logged in users can choose what breweries to visit and get  driving directions for the most optimal route. Remember to always use a designated driver, please don't drink and drive!</p>
       
     </div>
+<<<<<<< HEAD
 <!-- Left Column -->
   <div class="container">
     <div class="row left-column">
@@ -109,6 +146,29 @@
           <input id="postalCode" type="text" placeholder="Zip Code"><br>
           <input type="submit" value="Submit"><br><br>
         </form>
+=======
+    <!-- Left Column -->
+    <div id="container" style="width:100%;">
+      <div id="left" style="float:left; width:30%;">
+        <div class="row-left-column">
+          <!-- <div class="col-sm-6"> -->
+          <div class="container form-background-color">
+            <p class="left-column-top-text">
+              <font size="6">To find a brewery</font>
+            </p>
+            <p class="left-column-top-text">Enter a City and State or a Zip Code</p>
+
+            <form id="form">
+              <input id="locality" type="text" placeholder="enter a City"><br>
+              <input id="region" type="text" placeholder="enter a State"><br><br>
+              <input id="postalCode" type="text" placeholder="Zip Code"><br>
+              <input type="submit" value="Submit"><br><br>
+            </form>
+          </div>
+          <!-- </div> -->
+        </div>
+
+>>>>>>> 2639adf3a6d497e0ab4f2df61dd2a47ba8735d09
         <div id="app">
         <h2>Brewery Results</h2>
         <h3 v-if="breweries === undefined">No results found</h3>
