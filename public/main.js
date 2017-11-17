@@ -10,7 +10,7 @@ window.onclick = function(event) {
         modal.style.display = "none";
     }
 }
- 
+
 
 
 
@@ -71,7 +71,7 @@ var mainVm = new Vue({
 
           console.log("map: ", google.maps)
               this.map = new google.maps.Map(document.getElementById('map'), {
-              center: {lat:61.180059, lng: -149.822075},
+              center: {lat:39.74, lng: -104.9},
               scrollwheel: false,
               zoom: 4
             });

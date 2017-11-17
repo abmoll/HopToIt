@@ -143,7 +143,7 @@
             <p>{{item.brewery.name}}</p>
             <p>{{item.streetAddress}}</p>
             <p>{{item.locality}}, {{item.region}} {{item.postalCode}}</p>
-            <p><a v-bind:href="item.website">{{item.website}}</a></p>
+            <p><a v-bind:href="item.website" target="_blank">{{item.website}}</a></p>
             <input id="delete" type="button" v-on:click="removeBrewery(item, index, $event)" value="Delete">
             <input type="button" value="Add to Route" v-on:click="addBrewery(item, $event)">
           </div>
