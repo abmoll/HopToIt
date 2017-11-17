@@ -4,6 +4,7 @@
   padding-top: 5px;
 }
 
+
 a {
   color: blue;
 }
@@ -26,6 +27,12 @@ a:hover {
   height: 600px;
 }
 
+.divider {
+    width:5px;
+    height:auto;
+    display:inline-block;
+}
+
 .beer-history {
 }
 
@@ -33,6 +40,17 @@ a:hover {
   height:600px;
 }
 
+#loginbtn {
+  margin-right: 15px;
+}
+
+.row {
+  margin-left: 3px;
+}
+
+.row-left-column {
+  margin-left: 2px;
+}
 .left-column {
   margin-top: 80px;
 }
