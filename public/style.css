@@ -50,6 +50,10 @@ a:hover {
   margin-right: 15px;
 }
 
+#delete {
+  margin-left: 10px;
+}
+
 .row {
   margin-left: 3px;
 }

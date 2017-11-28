@@ -95,7 +95,7 @@
 
   <div class="headline">
     <h1>Welcome to Hop To It!</h1>
-    <h2>Your guide to the best breweries and beers in the country!</h2>
+    <h2>Your guide to the best breweries and beers in the country</h2>
   </div>
 
   <div class="first-container">
@@ -119,19 +119,21 @@
 
             <form id="form">
               <input id="locality" type="text" placeholder="Enter City"><br>
-              <input id="region" type="text" placeholder="Enter State"><br><br>
+              <input id="region" type="text" placeholder="Enter State"><br><br>OR
               <input id="postalCode" type="text" placeholder="Enter Zip Code"><br>
-              <input type="submit" value="Submit"><br><br>
+              <input type="submit" value="Submit"><br>
+            </form>
+            <form action="/getRoute" method="get">
+              <input type="submit" value="Get Route"><br>
             </form>
           </div>
           <!-- </div> -->
         </div>
 
         <div id="app">
-          <h2>Brewery Results</h2>
+          <!-- <h2>Brewery Results</h2> -->
           <h3 v-if="breweries === undefined">No results found</h3>
-          <div v-for="(item,index) in breweries" v-if="!item.hidden && index<10">
-            <br>
+          <div v-for="(item,index) in breweries" v-if="!item.hidden && index<10"><br>
             <p>{{item.brewery.name}}</p>
             <p>{{item.streetAddress}}</p>
             <p>{{item.locality}}, {{item.region}} {{item.postalCode}}</p>
@@ -139,9 +141,6 @@
             <input id="delete" type="button" v-on:click="removeBrewery(item, index, $event)" value="Delete">
             <input type="button" value="Add to Route" v-on:click="addBrewery(item, $event)">
           </div>
-          <form action="/getRoute" method="get">
-            <input type="submit" value="Get Route">
-          </form>
         </div>
       </div>
       <!-- Right Column -->
