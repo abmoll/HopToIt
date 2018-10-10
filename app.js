@@ -22,7 +22,6 @@ const logger = (req, res, next) => {
   next();
 }
 
-
 app.use(logger);
 
 //use sessions for tracking logins
@@ -39,10 +38,8 @@ app.use(session({
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-
 // serve static files from template
 app.use(express.static(__dirname + '/public'));
-
 
 // include routes
 var routes = require('./routes/router');
@@ -61,7 +58,6 @@ app.use(function (err, req, res, next) {
   res.status(err.status || 500);
   res.send(err.message);
 });
-
 
 // listen on port 8080
 app.listen(8080, function () {
